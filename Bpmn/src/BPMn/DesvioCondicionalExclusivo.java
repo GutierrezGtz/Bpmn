@@ -1,17 +1,38 @@
 package BPMn;
 
-public class DesvioCondicionalExclusivo extends Tarefas  {
+public class DesvioCondicionalExclusivo extends Elemento implements aponta {
 	
-	public void condicao(boolean aTarefaHumana, boolean atingiuRequisitos) {
+	private Elemento desvioCondicional;
+	
+	DesvioCondicionalExclusivo(Elemento desvioCondicional){
+		this.desvioCondicional = desvioCondicional;
+	}
+	
+	
+	public Elemento condicao(boolean tarefaUsuario, boolean atingiuRequisitos) {
 		
-		if(aTarefaHumana == true) {
-			//return conteudo aceito
-		}else if(aTarefaHumana == false) {
+		if(tarefaUsuario == true) {
+			Elemento apontaPara(Elemento Elemento1) {
+				return this.desvioCondicional = Elemento1;
+			}
+		}else if(tarefaUsuario == false) {
 			if(atingiuRequisitos == true) {
-				//return precisa de modificação
+				
 			}else {
-				//return conteudo rejeitado
+				
 			}
 		}
 	}
+
+	
+
+
+	@Override
+	public Elemento changeType(Elemento trocaElemento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 }

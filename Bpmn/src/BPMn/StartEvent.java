@@ -1,9 +1,9 @@
 package BPMn;
 
-public class StartEvent extends Tarefas  {
+public class StartEvent extends Elemento implements aponta {
 	
-	String Name;
-	
+	private String Name;
+	private Elemento startEvent;
 	
 	
 	StartEvent(String Name){
@@ -25,6 +25,17 @@ public class StartEvent extends Tarefas  {
 //		se atender os resquisitos retorna true parao metodo atributosPassaram()
 		
 		return true;
+	}
+
+	public Elemento apontaPara(Elemento Elemento1) {
+		return this.startEvent = Elemento1;
+	}
+	
+
+	@Override
+	public Elemento changeType(Elemento trocaElemento) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -2,5 +2,6 @@ package BPMn;
 
 interface aponta {
 	
-	Tarefas apontaPara(Tarefas tarefa1);
+	Elemento apontaPara(Elemento Elemento1);
+	Elemento changeType(Elemento trocaElemento);
 }
