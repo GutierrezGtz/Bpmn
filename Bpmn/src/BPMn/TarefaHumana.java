@@ -2,24 +2,32 @@ package BPMn;
 
 public class TarefaHumana extends Elemento implements aponta {
 	
-	
+	private Elemento tarefaHumana;
 	private String campoTexto;
-	private Elemento tH;
-	
-	TarefaHumana(String campoTexto, Elemento tH, String nome){
+		
+	TarefaHumana(String campoTexto, String nome){
 		this.campoTexto = campoTexto;
-		this.tH = tH;
 		this.nome = nome;
+		this.elemento = tarefaHumana;
 	}
 	
-	public Elemento apontaPara(Elemento Elemento1) {
-		return this.tH = Elemento1;
+	public Elemento fluxoEsta(Elemento novoElemento) {
+		return tarefaHumana = novoElemento;
 	}
+	
 
-	@Override
 	public Elemento changeType(Elemento trocaElemento) {
-		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	public void retiraVariaveis() {
+		
+		
+		
+	}
+	
+	
+	
 	
 }

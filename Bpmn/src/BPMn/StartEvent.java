@@ -2,39 +2,30 @@ package BPMn;
 
 public class StartEvent extends Elemento implements aponta {
 	
-	private String Name;
 	private Elemento startEvent;
+
+	StartEvent(String nome){
+		this.nome = nome;
+		this.elemento = startEvent;
+	}
 	
-	
-	StartEvent(String Name){
-		
-		this.Name = Name;
+	public Elemento fluxoEsta(Elemento novoElemento) {
+		return startEvent = novoElemento;
 	}
 	
 	boolean atributosPassaram(){
 		
-		if(atributosAtendidos() == true) {
+		if(atingiuRequisitos() == true) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private boolean atributosAtendidos() {
-//		compara os atributos passados com Dados de entrada
-//		se atender os resquisitos retorna true parao metodo atributosPassaram()
-		
-		return true;
-	}
-
-	public Elemento apontaPara(Elemento Elemento1) {
-		return this.startEvent = Elemento1;
-	}
 	
-
+	
 	@Override
 	public Elemento changeType(Elemento trocaElemento) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
