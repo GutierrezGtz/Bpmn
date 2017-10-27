@@ -1,27 +1,43 @@
 package BPMn;
 
-public class Elemento extends FluxoDados{
 
-	public String nome;
-	protected Elemento elemento;
+
+public class Elemento{
+
+	private String nome;
+	private Elemento elemento;
 	
-	
-	public Elemento fluxoEsta(Elemento novoElemento) {
-		return elemento = novoElemento;
+	Elemento(String nome, Elemento elemento){
+		this.elemento = elemento;
+		this.nome = nome;
 	}
 	
+	//------------------------------>>>METODOS<<<------------------------------------------------------------
 	
-	
-	public void remove() {
-		if(marcado() == true) {
-			
-		}
-	}
-	private boolean marcado() {
-		return false;
-	}
-	
-	
-	
+	public Elemento getElemento() {
+        return elemento;
+    }
+
+    public void setElemento(Elemento elemento) {
+        this.elemento = elemento;
+    }
+
+    public String getNome() {
+        if (nome == null) {
+
+        	nome = "";
+        }
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
+    
+    
+    
+    
 }
 

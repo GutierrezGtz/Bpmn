@@ -31,7 +31,7 @@ public class DesvioCondicionalExclusivo extends Elemento implements aponta {
 		
 		switch (indice) {
 		case 1:
-			
+			return 
 			break;
 			
 			
