@@ -24,25 +24,5 @@ public class DesvioCondicionalExclusivo extends Elemento implements aponta {
 			return elemento;//criar metodo que o novo elemento sera o elemento clicado
 		}
 	}
-
-	public Elemento changeType(Elemento trocaElemento) {
-		
-		int indice = 1;
-		
-		switch (indice) {
-		case 1:
-			return 
-			break;
-			
-			
-			
-		}
-		
-		
-		
-		
-	}
-
-
-	
 }
+

@@ -1,18 +1,12 @@
 package BPMn;
 
-
-
 public class Elemento{
 
 	private String nome;
 	private Elemento elemento;
+	private EventoSimplesDeFim fim;
 	
-	Elemento(String nome, Elemento elemento){
-		this.elemento = elemento;
-		this.nome = nome;
-	}
-	
-	//------------------------------>>>METODOS<<<------------------------------------------------------------
+	//------------------------------>>>GET/SETTERS<<<------------------------------------------------------------
 	
 	public Elemento getElemento() {
         return elemento;
@@ -34,10 +28,38 @@ public class Elemento{
         this.nome = nome;
     }
     
+  //------------------------------>>>METODOS<<<------------------------------------------------------------
     
+    boolean atingiuRequisitos() {
+    	return true;// se requisitos forem atingidos
+    }
+	
+    boolean atributosPassaram(){
+			
+			if(atingiuRequisitos() == true) {
+				return true;
+			}else {
+				return false;
+			}					
+	}
     
-    
-    
+    public boolean terminou() {
+		return false;
+	}
+
+	boolean proximoElemento() {
+		if(atributosPassaram() == true) {
+			setElemento(elemento);
+			return true;
+		}else{
+			return terminou();
+		}
+	}
+	
+   
+//	public Elemento changeType(Elemento trocaElemento) {
+//		return null;
+//	}
     
 }
 

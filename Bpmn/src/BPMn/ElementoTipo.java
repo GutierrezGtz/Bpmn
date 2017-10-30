@@ -1,7 +1,6 @@
 package BPMn;
 
-import org.dom4j.Element;
-import org.w3c.dom.Element;
+
 
 public class ElementoTipo {
 	
@@ -17,8 +16,8 @@ public class ElementoTipo {
     
     //---------------------------------------------------------------------------
     
-    public static boolean isFluxo(Element element) {
-        if (ElementoTipo.FLUXO.equals(element.getName())) {
+    public static boolean isFluxo(Elemento elemento) {
+        if (ElementoTipo.FLUXO.equals(elemento.getNome())) {
             return true;
         }
         return false;

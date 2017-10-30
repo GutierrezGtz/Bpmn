@@ -1,34 +1,17 @@
 package BPMn;
 
-public class StartEvent extends Elemento implements aponta {
+public class StartEvent extends Elemento{
 	
 	private Elemento startEvent;
-
-	StartEvent(String nome){
-		this.nome = nome;
-		this.elemento = startEvent;
-	}
+	private Elemento fluxo;
 	
-	public Elemento fluxoEsta(Elemento novoElemento) {
-		return startEvent = novoElemento;
-	}
 	
-	boolean atributosPassaram(){
-		
-		if(atingiuRequisitos() == true) {
+	boolean proximoElemento(){
+		if(atributosPassaram() == true) {
+			fluxo.setElemento(startEvent);
 			return true;
-		} else {
-			return false;
+		}else{
+			return fluxo.terminou();
 		}
 	}
-
-	
-	
-	@Override
-	public Elemento changeType(Elemento trocaElemento) {
-		return null;
-	}
-	
-	
-
 }
