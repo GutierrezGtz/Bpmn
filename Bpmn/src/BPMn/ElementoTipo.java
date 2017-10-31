@@ -1,6 +1,6 @@
 package BPMn;
 
-
+import BPMn.Elementos.Elemento;
 
 public class ElementoTipo {
 	

@@ -1,5 +1,7 @@
 package BPMn;
 
+import BPMn.Elementos.Elemento;
+
 public class FluxoDados {
 	
 	private Elemento alvoRef;

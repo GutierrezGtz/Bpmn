@@ -1,5 +1,7 @@
 package BPMn;
 
+import BPMn.Elementos.Elemento;
+
 public class Aponta extends Elemento {
 
 	private Elemento elemento;
@@ -7,7 +9,7 @@ public class Aponta extends Elemento {
 	
 	Elemento apontando(){
 		if(proximoElemento() == true) {
-			aponta = elemento.getElemento();
+			aponta = elemento.setElemento(elemento);
 		}
 		return aponta;
 	}
