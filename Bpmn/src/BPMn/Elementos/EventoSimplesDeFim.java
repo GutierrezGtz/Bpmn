@@ -20,7 +20,7 @@ public class EventoSimplesDeFim extends Elemento {
 		if(startEvent.proximoElemento() == false) {
 			throw new IllegalArgumentException("FLUXO ACABOU, ATRIBUTOS NÃO PASSARAM");
 		}
-		return fluxo.getElemento();
+		return fluxo.getElemento();//errado
 	}
 	
 	public Elemento acaoTerminaPorFluxo() {//quando o fluxo acaba (pode ser definido nas outras classes).

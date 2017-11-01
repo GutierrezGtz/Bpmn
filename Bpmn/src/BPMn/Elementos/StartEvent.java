@@ -2,19 +2,22 @@ package BPMn.Elementos;
 
 public class StartEvent extends Elemento{
 	
-	private StartEvent startEvent;
-	private Elemento fluxo;
-	private EventoSimplesDeFim endEvent;
+	
 
 //------------------------------>>>METODOS<<<------------------------------------------------------------
+	
+	private boolean requisitos;
+
+	StartEvent(boolean requisitos) {
+		this.requisitos = requisitos;
+	}
+	
 	@Override
-	boolean proximoElemento(){
-		if(atributosPassaram() == true) {
-			fluxo.setElemento(startEvent);
+	public boolean proximoElemento() {
+		if(requisitos == true) {
 			return true;
-		}else{
-			fluxo.setElemento(endEvent);
-			return false;//posso definir o fim aqui ou no EventoSimplesDeFim
+		}else {
+			return false;
 		}
 	}
 }
