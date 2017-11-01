@@ -4,6 +4,7 @@ public class Elemento{
 
 	private String nome;
 	private Elemento elemento;
+	private boolean requisitos;
 	
 //------------------------------>>>GET/SETTERS<<<------------------------------------------------------------
 	
@@ -27,23 +28,27 @@ public class Elemento{
         this.nome = nome;
     }
     
-  //------------------------------>>>METODOS<<<------------------------------------------------------------
+    public boolean isRequisitos() {
+    	return requisitos;
+	}
+
+	public void setRequisitos(boolean requisitos) {
+		this.requisitos = requisitos;
+	}
     
-    boolean atingiuRequisitos() {
-    	return true;// se requisitos forem atingidos
-    }
-	
+  //------------------------------>>>METODOS<<<------------------------------------------------------------
+
     boolean atributosPassaram(){
-			
-			if(atingiuRequisitos() == true) {
+
+    		if(requisitos == true) {
 				return true;
 			}else {
 				return false;
 			}					
 	}
     
-
 	boolean proximoElemento() {
+		
 		if(atributosPassaram() == true) {
 			setElemento(elemento);
 			return true;
@@ -51,6 +56,8 @@ public class Elemento{
 			return false;
 		}
 	}
+
+	
 	
    
 	/*public Elemento changeType(Elemento trocaElemento) {

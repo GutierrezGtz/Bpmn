@@ -6,23 +6,24 @@ public class DesvioCondicionalExclusivo extends Elemento  {
 	private Elemento fluxo;
 	private Elemento elemento;
 	private DesvioCondicionalExclusivo DCE;
-	
+	private EventoSimplesDeFim endEvent;
 
 	//------------------------------>>>METODOS<<<------------------------------------------------------------
 
 	@Override
-	boolean proximoElemento(){
+	boolean proximoElemento(){	
 		if(fluxo.proximoElemento() == true) {
 			DCE.condicao();
 		}
 		return true;
-	}	
+	}
 	
-	public Elemento condicao() {//falta a possibiladade de ter duas opçoes na qual é false e uma leva a uma nova filtragem
+	
+	public Elemento condicao() {
 		
-		if(atingiuRequisitos() == false) {
-			fluxo.setElemento(elemento);
-		}else if(atingiuRequisitos() == true && atributosPassaram() == true) {
+		if(atributosPassaram() == false) {
+			fluxo.setElemento(endEvent);
+		}else if(atributosPassaram() == true && atingiuRequisitos() == true ) {// atingiuRequisitos()  PRECISA IMPLEMENTAÇÃO
 			fluxo.setElemento(elemento);
 		}else {
 			fluxo.setElemento(elemento);

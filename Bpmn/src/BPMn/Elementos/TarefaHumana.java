@@ -2,16 +2,14 @@ package BPMn.Elementos;
 
 public class TarefaHumana extends Elemento {
 	
-	private Elemento humanTask;
+	private TarefaHumana humanTask;
 	private String campoTexto;
 	private Elemento fluxo;
 
 	TarefaHumana(String campoTexto){
 		this.campoTexto = campoTexto;
-
 	}
 	
-	//abc
 //------------------------------>>>GET/SETTERS<<<------------------------------------------------------------
 	
 	public String getCampoTexto() {

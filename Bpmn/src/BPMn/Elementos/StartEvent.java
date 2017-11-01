@@ -2,7 +2,7 @@ package BPMn.Elementos;
 
 public class StartEvent extends Elemento{
 	
-	private Elemento startEvent;
+	private StartEvent startEvent;
 	private Elemento fluxo;
 	private EventoSimplesDeFim endEvent;
 
@@ -17,9 +17,5 @@ public class StartEvent extends Elemento{
 			return false;//posso definir o fim aqui ou no EventoSimplesDeFim
 		}
 	}
-	
-	
-	
-	
 }
  

@@ -2,8 +2,9 @@ package BPMn.Elementos;
 
 public class EventoSimplesDeFim extends Elemento {
 
-	private Elemento eventoFim;
+	private EventoSimplesDeFim eventoFim;
 	private Elemento fluxo;
+	private StartEvent startEvent;
 
 //------------------------------>>>METODOS<<<------------------------------------------------------------	
 	
@@ -16,8 +17,8 @@ public class EventoSimplesDeFim extends Elemento {
 	}	
 	
 	public Elemento acaoTerminaPorAtributos() {//quando atributos definidos em StartEvent não passam.
-		if(fluxo.proximoElemento() == false) {
-			throw new IllegalArgumentException("FLUXO ACABOU");
+		if(startEvent.proximoElemento() == false) {
+			throw new IllegalArgumentException("FLUXO ACABOU, ATRIBUTOS NÃO PASSARAM");
 		}
 		return fluxo.getElemento();
 	}
