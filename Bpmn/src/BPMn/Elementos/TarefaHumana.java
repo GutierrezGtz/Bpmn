@@ -20,7 +20,7 @@ public class TarefaHumana extends Elemento {
 		this.campoTexto = campoTexto;
 	}
 	
-	
+
 //------------------------------>>>METODOS<<<------------------------------------------------------------
 	
 	public boolean validaçãoHumana(boolean tarefaHumana) {
