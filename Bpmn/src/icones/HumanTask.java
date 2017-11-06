@@ -1,16 +1,12 @@
 package icones;
 
-public class HumanTask {
+public class HumanTask extends Elemento{
 
+
+	private Elemento elemento;
+	private EventoFinal eventoFinal;
 	
-	private boolean tarefaHumana;
-
-	HumanTask(boolean tarefaHumana) {
-		this.tarefaHumana = tarefaHumana;
-	}
-	
-
-	public boolean validaçãoHumana() {
+	public boolean validaçãoHumana(boolean tarefaHumana) {
 		if(tarefaHumana == true) {
 			return true;
 		}else {
@@ -19,10 +15,14 @@ public class HumanTask {
 	}
 
 
-	public boolean proximoElemento() {
-		
-		return false;
+	public Elemento proximoElemento(Elemento proximoElemento) {
+		if(validaçãoHumana(true)) {
+			elemento = proximoElemento;
+			return elemento;
+			
+		}else {
+			return eventoFinal;
+		}
 	}
-}
-	
+}	
 

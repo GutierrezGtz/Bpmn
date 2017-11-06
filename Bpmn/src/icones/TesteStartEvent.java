@@ -5,29 +5,24 @@ import org.junit.Test;
 
 public class TesteStartEvent {
 
-	
-	private Elemento elemento;
+	private EventoFinal eventoFinal;
+	private HumanTask humanTask = new HumanTask();
+
 	
 	@Test
-	public void QuandoAtributosPassam() {
-		boolean expected = true;
-        boolean actual = new EventoInicial(true).proximoElemento();
+	public void RetornoElemento() {
+		Elemento expected = humanTask;
+        Elemento actual = new EventoInicial().proximoElemento(true, humanTask);
         Assert.assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void QuandoAtributosNaoPassam() {
-		boolean expected = false;
-        boolean actual = new EventoInicial(false).proximoElemento();
+	public void RetornoElemento2() {
+		Elemento expected = eventoFinal;
+        Elemento actual = new EventoInicial().proximoElemento(false, humanTask);
         Assert.assertEquals(expected, actual);
 	}
 	
-//	@Test
-//	public void RetornoElemento() {
-//		Elemento expected = elemento;
-//        Elemento actual = new EventoInicial(false).retornaElemento();
-//        Assert.assertEquals(expected, actual);
-//	}
 	
 	
 	

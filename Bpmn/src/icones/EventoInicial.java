@@ -1,34 +1,17 @@
 package icones;
 
-
-
 public class EventoInicial extends Elemento {
 	
-	
-	EventoInicial(Elemento elemento, boolean requisitos) {
-		super(elemento, requisitos);
-	}
-	
-	private EventoInicial eventoInicial;
 	private EventoFinal eventoFinal;
-	
-	
+	private Elemento elemento;
 	//------------------------------>>>METODOS<<<------------------------------------------------------------
 	
-
-	
-	public boolean proximoElemento() {
+	public Elemento proximoElemento(boolean requisitos, Elemento proximoElemento) {
 		if(requisitos == true) {
-			//elemento.setElementoeventoInicial
-			return true;
+			elemento = proximoElemento;
+			return elemento;
 		}else {
-			//elemento.setElemento(eventoFinal);
-			return false;
+			return eventoFinal;
 		}
 	}
-
-//	public Elemento retornaElemento() {
-//		return getElemento();
-//		
-//	}
 }

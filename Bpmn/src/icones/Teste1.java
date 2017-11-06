@@ -5,9 +5,12 @@ public class Teste1 {
 	
 	public static void main(String[] args) {
 		
-		EventoInicial eI = new EventoInicial(false);
-		System.out.println(eI.proximoElemento());
-		System.out.println(eI.getElemento());
+		HumanTask humanTask = new HumanTask(); 
+		EventoInicial eI = new EventoInicial();
+		
+		Elemento proximoElemento = eI.proximoElemento(true, humanTask);
+		System.out.println(proximoElemento);
+	
 	}
 	
 }
