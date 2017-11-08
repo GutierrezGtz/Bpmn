@@ -2,27 +2,15 @@ package icones;
 
 public class HumanTask extends Elemento{
 
-
-	private Elemento elemento;
-	private EventoFinal eventoFinal;
-	
-	public boolean validaçãoHumana(boolean tarefaHumana) {
-		if(tarefaHumana == true) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-
-
-	public Elemento proximoElemento(Elemento proximoElemento) {
-		if(validaçãoHumana(true)) {
+	public Elemento ProximoElemento(Elemento proximoElemento) {
 			elemento = proximoElemento;
-			return elemento;
-			
-		}else {
-			return eventoFinal;
-		}
+			return elemento;	
 	}
+	
+	boolean RequisitosAtendidos(boolean validaçãoHumana){
+		return validaçãoHumana;
+	}
+	
+	
 }	
 

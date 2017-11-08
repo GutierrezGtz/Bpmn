@@ -7,9 +7,19 @@ public class Teste1 {
 		
 		HumanTask humanTask = new HumanTask(); 
 		EventoInicial eI = new EventoInicial();
+		DesvioCondicionalExclusivo DCE = new DesvioCondicionalExclusivo();
 		
-		Elemento proximoElemento = eI.proximoElemento(true, humanTask);
+		
+		Elemento proximoElemento = eI.ProximoElemento(humanTask);
 		System.out.println(proximoElemento);
+		
+		Elemento proximoElemento2 = humanTask.ProximoElemento(DCE);
+		System.out.println(proximoElemento2);
+		
+		
+		Elemento testandoElemento = DCE.TestandoElemento(humanTask);
+		System.out.println(testandoElemento);
+		
 	
 	}
 	

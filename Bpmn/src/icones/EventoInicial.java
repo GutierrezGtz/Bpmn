@@ -2,16 +2,24 @@ package icones;
 
 public class EventoInicial extends Elemento {
 	
-	private EventoFinal eventoFinal;
-	private Elemento elemento;
+	
 	//------------------------------>>>METODOS<<<------------------------------------------------------------
 	
-	public Elemento proximoElemento(boolean requisitos, Elemento proximoElemento) {
-		if(requisitos == true) {
+	public Elemento ProximoElemento(Elemento proximoElemento) {
 			elemento = proximoElemento;
 			return elemento;
-		}else {
-			return eventoFinal;
-		}
 	}
+	
+	boolean RequisitosAtendidos(boolean atendeuRequisitos){
+		if(atendeuRequisitos == true) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}	
+	
+	
+	
+	
 }
