@@ -15,8 +15,8 @@ public class Teste1 {
 		b.connect("aaa", "bbb");
 		
 		System.out.println(b.countElements());
-		System.out.println(b.getNextElement("bbb"));
-		System.out.println(b.getNextElement("x"));
+		//System.out.println(b.getNextElement("aaa"));
+		
 		
 		
 		
