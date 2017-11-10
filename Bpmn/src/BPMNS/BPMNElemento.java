@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-
 public class BPMNElemento {
 
 	ArrayList<Object> lista = new ArrayList<>();
 	HashMap<String, String> connector = new HashMap<>();
 	HashMap<String, String[]> connector2 = new HashMap<>();
+	
+	
 	
 	public void adicionaElemento(HumanTask humanTask) {
 		lista.add(humanTask.getName());	
@@ -27,11 +28,15 @@ public class BPMNElemento {
 		lista.add(exclusiveGateway.getName());
 		
 	}
+	
+	
 
 	public Object countElements() {
 
 		return lista.size();
 	}
+	
+	
 	
 	public void connect(String string, String string2)throws Exception {
 		
@@ -41,21 +46,30 @@ public class BPMNElemento {
 				throw new IllegalArgumentException("Elemento Inexistente");
 			}
 	}
-	public void connectEG(String string, String[] string2)throws Exception {
+
+	public void connectEG(String string, String[] strings)throws Exception {
+		int verificado;
+		for(int i = 0; i < strings.length; i++) {
+			if(! lista.contains(strings[i])) {
+				verificado = 1;
+			}else {
+				throw new IllegalArgumentException("Elemento Inexistente");
+			}
+		}
 		
-		if(lista.contains(string2) && lista.contains(string)) {
-			connector2.put(string, string2);
+		if(lista.contains(string)) {
+			connector2.put(string, strings);
 		}else {
 			throw new IllegalArgumentException("Elemento Inexistente");
 		}
-}	
-		
+	}	
+
+	
+	
 	public Object getNextElement(String string) {
 		connector.containsKey(string);
 		return connector.get(string);
 	}
-
-	
 
 	
 }

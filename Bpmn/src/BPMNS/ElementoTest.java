@@ -34,7 +34,7 @@ public class ElementoTest {
 	}
 	
 	@Test
-	public void connect_happy_SE_HT_EG_EE() throws Exception{
+	public void connect_happy_SE_HT_EG_EEtest() throws Exception{
 	BPMNElemento elemento = new BPMNElemento();
 	elemento.adicionaElemento(new StartEvent("inicio"));
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
@@ -70,7 +70,7 @@ public class ElementoTest {
 	
 	
 	@Test
-	public void connect_happy_EG() throws Exception{
+	public void connect_happy_SE_HT_EG_EE() throws Exception{
 	BPMNElemento elemento = new BPMNElemento();
 	elemento.adicionaElemento(new StartEvent("inicio"));
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
@@ -78,12 +78,14 @@ public class ElementoTest {
 	elemento.adicionaElemento(new EndEvent("fim"));
 	elemento.connect("inicio","Responder questao");
 	elemento.connect("Responder questao","Desvio Exclusivo");
-	elemento.connectEG("Desvio Exclusivo","fim");
-	Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
+	elemento.connectEG("Desvio Exclusivo", new String[] {"fim", "Responder questao", "Desvio Exclusivo" });
+	elemento.connect("Responder questao","fim");
+	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
+	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
+	Assert.assertEquals("Responder questao", elemento.getNextElement("Desvio Exclusivo"));
+	Assert.assertEquals("fim", elemento.getNextElement("Responder questao"));
 	
-//	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
-//	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
-//	Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
+
 	}
 	
 	
@@ -91,5 +93,6 @@ public class ElementoTest {
 	
 }
 	
+
 	
 
