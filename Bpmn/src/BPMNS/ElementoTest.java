@@ -27,8 +27,8 @@ public class ElementoTest {
 	elemento.adicionaElemento(new StartEvent("inicio"));
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
 	elemento.adicionaElemento(new EndEvent("fim"));
-	elemento.connect("inicio","Responder questao");
-	elemento.connect("Responder questao","fim");
+	elemento.connect("inicio",new String[] {"Responder questao"});
+	elemento.connect("Responder questao",new String[] {"fim"});
 	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
 	Assert.assertEquals("fim", elemento.getNextElement("Responder questao"));
 	}
@@ -40,9 +40,9 @@ public class ElementoTest {
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
 	elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
 	elemento.adicionaElemento(new EndEvent("fim"));
-	elemento.connect("inicio","Responder questao");
-	elemento.connect("Responder questao","Desvio Exclusivo");
-	elemento.connect("Desvio Exclusivo","fim");
+	elemento.connect("inicio",new String[] {"Responder questao"});
+	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" });
+	elemento.connect("Desvio Exclusivo",new String[] {"fim"});
 	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
 	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
 	Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
@@ -57,7 +57,7 @@ public class ElementoTest {
 		BPMNElemento elemento = new BPMNElemento();
 		elemento.adicionaElemento(new StartEvent("inicio"));
 		thrown.expectMessage("Elemento Inexistente");
-		elemento.connect("inicio","x");
+		elemento.connect("inicio",new String[] {"x"});
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class ElementoTest {
 		BPMNElemento elemento = new BPMNElemento();
 		elemento.adicionaElemento(new StartEvent("inicio"));
 		thrown.expectMessage("Elemento Inexistente");
-		elemento.connect("x","inicio");
+		elemento.connect("x",new String[] {"inicio"});
 	}
 	
 	
@@ -74,21 +74,25 @@ public class ElementoTest {
 	BPMNElemento elemento = new BPMNElemento();
 	elemento.adicionaElemento(new StartEvent("inicio"));
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
+	elemento.adicionaElemento(new HumanTask("Responder questao2"));
+	elemento.adicionaElemento(new HumanTask("Responder questao3"));
 	elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
 	elemento.adicionaElemento(new EndEvent("fim"));
-	elemento.connect("inicio","Responder questao");
-	elemento.connect("Responder questao","Desvio Exclusivo");
-	elemento.connectEG("Desvio Exclusivo", new String[] {"fim", "Responder questao", "Desvio Exclusivo" });
-	elemento.connect("Responder questao","fim");
+	elemento.connect("inicio",new String[] {"Responder questao"},true);
+	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" }, true);
+	elemento.connect("Desvio Exclusivo",new String[] {"fim", "Responder questao2", "Responder questao3" }, true);
+	elemento.connect("Responder questao2",new String[] {"fim"}, true);
+	elemento.connect("Responder questao3",new String[] {"fim"}, true);
 	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
 	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
-	Assert.assertEquals("Responder questao", elemento.getNextElement("Desvio Exclusivo"));
-	Assert.assertEquals("fim", elemento.getNextElement("Responder questao"));
+	Assert.assertEquals("Responder questao3", elemento.getNextElement("Desvio Exclusivo"));
 	
-
+	
 	}
 	
 	
+	
+	//elemento.connect("Desvio Exclusivo", new String[] {"fim", "Responder questao", "Desvio Exclusivo" });
 	
 	
 }

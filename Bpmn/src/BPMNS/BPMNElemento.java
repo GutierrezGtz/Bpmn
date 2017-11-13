@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class BPMNElemento {
 
 	ArrayList<Object> lista = new ArrayList<>();
-	HashMap<String, String> connector = new HashMap<>();
-	HashMap<String, String[]> connector2 = new HashMap<>();
+	
+	HashMap<String, String[]> connector = new HashMap<>();
 	
 	
 	
@@ -36,36 +36,38 @@ public class BPMNElemento {
 		return lista.size();
 	}
 	
-	
-	
-	public void connect(String string, String string2)throws Exception {
-		
-			if(lista.contains(string2) && lista.contains(string)) {
-				connector.put(string, string2);
-			}else {
-				throw new IllegalArgumentException("Elemento Inexistente");
-			}
-	}
 
-	public void connectEG(String string, String[] strings)throws Exception {
-		int verificado;
-		for(int i = 0; i < strings.length; i++) {
-			if(! lista.contains(strings[i])) {
-				verificado = 1;
-			}else {
-				throw new IllegalArgumentException("Elemento Inexistente");
-			}
-		}
-		
-		if(lista.contains(string)) {
-			connector2.put(string, strings);
-		}else {
+	public void connect(String string, String[] strings, boolean resposta )throws Exception {
+		int verificado = 0;
+		if(!lista.contains(string)) {
 			throw new IllegalArgumentException("Elemento Inexistente");
 		}
-	}	
 
-	
-	
+		for(int i = 0; i < strings.length; i++) {
+			if(lista.contains(strings[i])) {
+				verificado += 1;
+			}  
+		}
+			if(verificado == strings.length) {//quer dizer que os elementos esxistem fluxo continua
+				if(resposta == true) {
+					strings[1]=null;
+					strings[2]=null;
+					connector.put(string, strings);
+				}else if(resposta == false) {
+					strings[0]=null;
+					strings[2]=null;
+					connector.put(string, strings);
+				}else {
+					strings[0]=null;
+					strings[1]=null;
+					connector.put(string, strings);
+				}
+			}else {
+				throw new IllegalArgumentException("Elemento Inexistente");
+			}
+		
+	}
+		
 	public Object getNextElement(String string) {
 		connector.containsKey(string);
 		return connector.get(string);
