@@ -27,8 +27,8 @@ public class ElementoTest {
 	elemento.adicionaElemento(new StartEvent("inicio"));
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
 	elemento.adicionaElemento(new EndEvent("fim"));
-	elemento.connect("inicio",new String[] {"Responder questao"});
-	elemento.connect("Responder questao",new String[] {"fim"});
+	elemento.connect("inicio",new String[] {"Responder questao"}, true);
+	elemento.connect("Responder questao",new String[] {"fim"}, true);
 	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
 	Assert.assertEquals("fim", elemento.getNextElement("Responder questao"));
 	}
@@ -40,9 +40,9 @@ public class ElementoTest {
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
 	elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
 	elemento.adicionaElemento(new EndEvent("fim"));
-	elemento.connect("inicio",new String[] {"Responder questao"});
-	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" });
-	elemento.connect("Desvio Exclusivo",new String[] {"fim"});
+	elemento.connect("inicio",new String[] {"Responder questao"}, true);
+	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" }, true);
+	elemento.connect("Desvio Exclusivo",new String[] {"fim"}, true);
 	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
 	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
 	Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
@@ -57,7 +57,8 @@ public class ElementoTest {
 		BPMNElemento elemento = new BPMNElemento();
 		elemento.adicionaElemento(new StartEvent("inicio"));
 		thrown.expectMessage("Elemento Inexistente");
-		elemento.connect("inicio",new String[] {"x"});
+		elemento.connect("inicio",new String[] {"x"},true);
+		
 	}
 	
 	@Test
@@ -65,12 +66,33 @@ public class ElementoTest {
 		BPMNElemento elemento = new BPMNElemento();
 		elemento.adicionaElemento(new StartEvent("inicio"));
 		thrown.expectMessage("Elemento Inexistente");
-		elemento.connect("x",new String[] {"inicio"});
+		elemento.connect("x",new String[] {"inicio"}, true);
 	}
 	
 	
 	@Test
-	public void connect_happy_SE_HT_EG_EE() throws Exception{
+	public void connect_happy_SE_HT_EG_2elements_true_EE() throws Exception{
+	BPMNElemento elemento = new BPMNElemento();
+	elemento.adicionaElemento(new StartEvent("inicio"));
+	elemento.adicionaElemento(new HumanTask("Responder questao"));
+	elemento.adicionaElemento(new HumanTask("Responder questao2"));
+	elemento.adicionaElemento(new HumanTask("Responder questao3"));
+	elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
+	elemento.adicionaElemento(new EndEvent("fim"));
+	elemento.connect("inicio",new String[] {"Responder questao"},true);
+	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" }, true);
+	elemento.connect("Desvio Exclusivo",new String[] {"Responder questao2", "Responder questao3" }, true);
+	elemento.connect("Responder questao2",new String[] {"fim"}, true);
+	elemento.connect("Responder questao3",new String[] {"fim"}, true);
+	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
+	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
+	Assert.assertEquals("Responder questao2", elemento.getNextElement("Desvio Exclusivo"));
+	
+	
+	}
+	
+	@Test
+	public void connect_happy_SE_HT_EG_3elements_true_EE() throws Exception{
 	BPMNElemento elemento = new BPMNElemento();
 	elemento.adicionaElemento(new StartEvent("inicio"));
 	elemento.adicionaElemento(new HumanTask("Responder questao"));
@@ -85,16 +107,51 @@ public class ElementoTest {
 	elemento.connect("Responder questao3",new String[] {"fim"}, true);
 	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
 	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
-	Assert.assertEquals("Responder questao3", elemento.getNextElement("Desvio Exclusivo"));
+	Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
 	
 	
 	}
 	
+	@Test
+	public void connect_happy_SE_HT_EG_2elements_false_EE() throws Exception{
+	BPMNElemento elemento = new BPMNElemento();
+	elemento.adicionaElemento(new StartEvent("inicio"));
+	elemento.adicionaElemento(new HumanTask("Responder questao"));
+	elemento.adicionaElemento(new HumanTask("Responder questao2"));
+	elemento.adicionaElemento(new HumanTask("Responder questao3"));
+	elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
+	elemento.adicionaElemento(new EndEvent("fim"));
+	elemento.connect("inicio",new String[] {"Responder questao"},true);
+	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" }, true);
+	elemento.connect("Desvio Exclusivo",new String[] {"Responder questao2", "Responder questao3" }, false);
+	elemento.connect("Responder questao2",new String[] {"fim"}, true);
+	elemento.connect("Responder questao3",new String[] {"fim"}, true);
+	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
+	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
+	Assert.assertEquals("Responder questao3", elemento.getNextElement("Desvio Exclusivo"));
+	}
+	
+	@Test
+	public void connect_happy_SE_HT_EG_3elements_false_EE() throws Exception{
+	BPMNElemento elemento = new BPMNElemento();
+	elemento.adicionaElemento(new StartEvent("inicio"));
+	elemento.adicionaElemento(new HumanTask("Responder questao"));
+	elemento.adicionaElemento(new HumanTask("Responder questao2"));
+	elemento.adicionaElemento(new HumanTask("Responder questao3"));
+	elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
+	elemento.adicionaElemento(new EndEvent("fim"));
+	elemento.connect("inicio",new String[] {"Responder questao"},true);
+	elemento.connect("Responder questao",new String[] {"Desvio Exclusivo" }, true);
+	elemento.connect("Desvio Exclusivo",new String[] {"fim", "Responder questao2", "Responder questao3" }, false);
+	elemento.connect("Responder questao2",new String[] {"fim"}, true);
+	elemento.connect("Responder questao3",new String[] {"fim"}, true);
+	Assert.assertEquals("Responder questao", elemento.getNextElement("inicio"));
+	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
+	Assert.assertEquals("Responder questao2", elemento.getNextElement("Desvio Exclusivo"));
+	Assert.assertEquals("fim", elemento.getNextElement("Responder questao2"));
 	
 	
-	//elemento.connect("Desvio Exclusivo", new String[] {"fim", "Responder questao", "Desvio Exclusivo" });
-	
-	
+	}
 }
 	
 
