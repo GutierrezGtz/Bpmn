@@ -1,7 +1,9 @@
 package BPMNS;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 
 public class BPMNElemento {
@@ -36,7 +38,7 @@ public class BPMNElemento {
 	}
 	
 	
-	public void connect(String string, String[] strings, boolean resposta )throws Exception {
+	public void connect(String string, String[] strings, boolean resposta )throws Exception {//resposta vem   
 		
 		int verificado = 0;
 		
@@ -65,11 +67,39 @@ public class BPMNElemento {
 	}
 	
 	
-//------------------------------>>>METODO NEXT ELEMENTO<<<-----------------------------	
+//------------------------------>>>METODO NEXT's <<<-----------------------------	
 	
 	public Object getNextElement(String string) {
 		connector.containsKey(string);
 		return connector.get(string);
+	}
+
+	public String adicionaVariaveis(String[] variaveis) {
+		
+		for(int i=0; i<variaveis.length; i++) {
+			String variavel = variaveis[i];
+			String[] variaveisETipos = variavel.split("/|/\\s");
+			Arrays.toString(variaveisETipos);
+			
+			if(variaveisETipos[1] == "int") {
+				int variaveisETipos[0];
+				
+			}else if(variaveisETipos[1] == "boolean") {
+				
+				
+			}else if(variaveisETipos[1] == "String") {
+				
+			}
+			
+			
+			
+			
+		}
+		return null;
+		
+		
+		
+		
 	}
 
 	

@@ -29,7 +29,14 @@ public class Teste1 {
 		System.out.println(b.getNextElement("aaa"));
 		System.out.println(b.getNextElement("bbb"));
 		System.out.println(b.getNextElement("ccc"));
-		System.out.println(b.getNextElement("bbbb"));
+		
+		
+		System.out.println(b.adicionaVariaveis(new String[] {"disponivel/boolean", "ndisponivel/boolean", "numero/int"}));
+		
+		
+		
+		
+		
 		
 		
 	}

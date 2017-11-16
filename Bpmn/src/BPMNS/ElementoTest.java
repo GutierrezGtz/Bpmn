@@ -149,10 +149,41 @@ public class ElementoTest {
 	Assert.assertEquals("Desvio Exclusivo", elemento.getNextElement("Responder questao"));
 	Assert.assertEquals("Responder questao2", elemento.getNextElement("Desvio Exclusivo"));
 	Assert.assertEquals("fim", elemento.getNextElement("Responder questao2"));
+	}
+
+
+//	@Test
+//	public void happy_FLUXO_SE_HT_EG_EE() throws Exception{
+//		BPMNElemento elemento = new BPMNElemento();
+//		elemento.adicionaElemento(new StartEvent("inicio"));
+//		elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
+//		elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
+//		elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
+//		elemento.adicionaElemento(new HumanTask("Renova"));
+//		elemento.adicionaElemento(new EndEvent("fim"));
+//		elemento.connect("inicio",new String[] {"Solicitar Refrigerante"},true);
+//		elemento.connect("Solicitar Férias",new String[] {"Verificar Disponibilidade" }, true);
+//		elemento.connect("Desvio Exclusivo",new String[] {"renova", "fim"}, false);
+//		elemento.getNextElement("inicio");
+//		elemento.getNextElement("Solicitar Férias");
+//		elemento.getNextElement("Desvio Exclusivo");
+//		Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
+//		Assert.assertEquals("Atendeu a Solicitação", elemento.correctMSG("pergunta"));
+//		
+//		
+//		
+//	}
+	
+	@Test
+	public void adicionaVar() throws Exception{
+	BPMNElemento elemento = new BPMNElemento();
+	elemento.adicionaVariaveis(new String[] {"disponivel/boolean","msg/String"});
+	
 	
 	
 	}
-}
+	
+}	
 	
 
 	
