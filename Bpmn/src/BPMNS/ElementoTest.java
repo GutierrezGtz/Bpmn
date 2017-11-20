@@ -1,5 +1,7 @@
 package BPMNS;
 
+import java.util.Scanner;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,7 +10,8 @@ import org.junit.rules.ExpectedException;
 
 public class ElementoTest {
 
-	
+	private boolean resposta;
+	Scanner s = new Scanner(System.in);
 	
 	@Test
 	public void adicionaElemento_happy_SE_HT_EG_EE(){
@@ -151,6 +154,52 @@ public class ElementoTest {
 	Assert.assertEquals("fim", elemento.getNextElement("Responder questao2"));
 	}
 
+	
+	
+	
+	
+	@Test
+	public void newflux() throws Exception{
+	BPMNElemento elemento = new BPMNElemento();
+	elemento.adicionaElemento(new StartEvent("Inicio"));
+	elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
+	elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
+	elemento.adicionaElemento(new ExclusiveGateway("Disponivel?"));
+	elemento.adicionaElemento(new HumanTask("Verificar Dinheiro Disponivel"));
+	elemento.adicionaElemento(new EndEvent("fim"));
+	elemento.adicionaElemento(new ExclusiveGateway("Dinheiro Disponivel?"));
+	elemento.adicionaElemento(new HumanTask("Realizar Pagamento"));
+	elemento.adicionaElemento(new HumanTask("Entrega Refrigerante"));
+	
+	elemento.connect("Inicio",new String[] {"Solicitar Refrigerante"},true);
+	elemento.connect("Solicitar Refrigerante",new String[] {"Verificar Disponibilidade" }, true);
+	elemento.connect("Verificar Disponibilidade",new String[] {"Disponivel?"}, true);
+	elemento.connect("Disponivel?",new String[] {"Verificar Dinheiro Disponivel", "fim"}, true);
+	elemento.connect("Verificar Dinheiro Disponivel",new String[] {"Dinheiro Disponivel?"}, true);
+	elemento.connect("Dinheiro Disponivel?",new String[] {"Realizar Pagamento", "fim"}, resposta);
+	elemento.connect("Realizar Pagamento",new String[] {"Entrega Refrigerante"}, true);
+	elemento.connect("Entrega Refrigerante",new String[] {"fim"}, true);
+	
+	elemento.campoFormulario("Solicitar Refrigerante", new String[] {"Guarana", "Coca-Cola", "Fanta"});//nomes do campo
+	elemento.campoFormulario("Verificar Disponibilidade", new String[] {"Guarana", "Coca-Cola"});
+	
+	elemento.preencheFormulario("Guarana");
+	elemento.preencheFormulario("");
+	
+	elemento.getNextElement("inicio");
+	elemento.getNextElement("Solicitar Refrigerante");
+	elemento.getNextElement("Verificar Disponibilidade");
+	
+	System.out.println("Digite a Resposta: ");
+	resposta = s.nextBoolean();
+	
+
+	Assert.assertEquals(true, resposta);
+	
+	
+	}
+	
+	
 
 //	@Test
 //	public void happy_FLUXO_SE_HT_EG_EE() throws Exception{
@@ -174,14 +223,14 @@ public class ElementoTest {
 //		
 //	}
 	
-	@Test
-	public void adicionaVar() throws Exception{
-	BPMNElemento elemento = new BPMNElemento();
-	elemento.adicionaVariaveis(new String[] {"disponivel/boolean","msg/String"});
-	
-	
-	
-	}
+//	@Test
+//	public void adicionaVar() throws Exception{
+//	BPMNElemento elemento = new BPMNElemento();
+//	elemento.adicionaVariaveis(new String[] {"disponivel/boolean","msg/String"});
+//	
+//	
+//	
+//	}
 	
 }	
 	
