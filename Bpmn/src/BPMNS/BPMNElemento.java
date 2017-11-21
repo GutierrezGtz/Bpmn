@@ -12,6 +12,7 @@ public class BPMNElemento {
 	ArrayList<Object> lista = new ArrayList<>();
 	
 	HashMap<String, String> connector = new HashMap<>();
+	HashMap<String, String[]> valores = new HashMap<>();
 //	HashMap<String, Integer> mapInt = new HashMap<>();
 //	HashMap<String, Integer> mapBool= new HashMap<>();
 //	HashMap<String, Integer> mapString = new HashMap<>();
@@ -21,8 +22,10 @@ public class BPMNElemento {
 //	private Integer varBool;
 //
 //	private Integer varString;
-//	
+
+	String[] listaDeOpçoes;
 	Scanner s = new Scanner(System.in);
+	boolean resposta = true;
 //------------------------------>>>METODOS ADICIONA<<<-----------------------------	
 
 	
@@ -51,7 +54,7 @@ public class BPMNElemento {
 	}
 	
 	
-	public void connect(String string, String[] strings, boolean resposta )throws Exception {//resposta vem   
+	public void connect(String string, String[] strings)throws Exception {//resposta vem   
 		
 		int verificado = 0;
 		
@@ -85,6 +88,25 @@ public class BPMNElemento {
 	public Object getNextElement(String string) {
 		connector.containsKey(string);
 		return connector.get(string);
+	}
+
+	public void campoFormulario(String string, String[] opçoes) {
+		listaDeOpçoes = opçoes;
+		valores.put(string, opçoes);
+	}
+
+	public String preencheFormulario(String key, String respPergunta) {
+		for(int i = 0; i < listaDeOpçoes.length; i++ ) {
+			if(respPergunta == valores.get(key)[i]){
+				resposta = true;
+				return "Há Refri";
+			}
+		}
+		resposta = false;
+		return "não Há Refri";
+		
+		
+		
 	}
 
 	

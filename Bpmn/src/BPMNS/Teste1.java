@@ -27,20 +27,20 @@ public class Teste1 {
 		b.adicionaElemento(EG);
 		
 		
-		b.connect("aaa", new String[] {"bbb"}, true);
-		b.connect("bbb", new String[] {"ccc"}, true);
-		b.connect("ccc", new String[] {"bbb","ddd"}, resposta);
-		b.connect("bbbb", new String[] {"ddd"}, true);
+		b.connect("aaa", new String[] {"bbb"});
+		b.connect("bbb", new String[] {"ccc"});
+		b.connect("ccc", new String[] {"bbb","ddd"});
+		b.connect("bbbb", new String[] {"ddd"});
 		System.out.println(b.getNextElement("aaa"));
 		System.out.println(b.getNextElement("bbb"));
 		
 		
-		  System.out.println("Digite a Resposta: ");
-		  resposta = s.nextBoolean();
-		  System.out.println(b.getNextElement("ccc"));    
+//		  System.out.println("Digite a Resposta: ");
+//		  resposta = s.nextBoolean();
+//		  System.out.println(b.getNextElement("ccc"));    
 
-		
-		
+		b.campoFormulario("aaa", new String[] {"laranja", "goiaba", "jabuticaba"});
+		System.out.println(b.preencheFormulario("aaa", "Tem!" ));
 		
 		
 		
