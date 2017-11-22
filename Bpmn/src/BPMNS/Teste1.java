@@ -10,15 +10,13 @@ public class Teste1 {
 		
 		Scanner s = new Scanner(System.in);
 		
-		StartEvent startEvent = new StartEvent("aaa"); 
+		StartEvent startEvent = new StartEvent("Inicio"); 
 		HumanTask humanTask = new HumanTask("bbb");
 		HumanTask humanTask2 = new HumanTask("bbbb");
 		ExclusiveGateway EG = new ExclusiveGateway("ccc");
 		EndEvent endEvent = new EndEvent("ddd"); 
 		
 		BPMNElemento b = new BPMNElemento();
-		
-		
 		
 		b.adicionaElemento(endEvent);
 		b.adicionaElemento(humanTask);
@@ -39,17 +37,6 @@ public class Teste1 {
 //		  resposta = s.nextBoolean();
 //		  System.out.println(b.getNextElement("ccc"));    
 
-		b.campoFormulario("aaa", new String[] {"laranja", "goiaba", "jabuticaba"});
-		System.out.println(b.preencheFormulario("aaa", "Tem!" ));
-		
-		
-		
-		
-//		System.out.println(b.adicionaVariaveis(new String[] {"disponivel/boolean", "ndisponivel/boolean", "numero/int"}));
-		
-		
-		
-		
 		
 		
 		

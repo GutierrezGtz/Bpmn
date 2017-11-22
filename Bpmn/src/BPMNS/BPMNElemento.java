@@ -90,9 +90,9 @@ public class BPMNElemento {
 		return connector.get(string);
 	}
 
-	public void campoFormulario(String string, String[] opçoes) {
+	public void campoFormulario(String key, String[] opçoes) {
 		listaDeOpçoes = opçoes;
-		valores.put(string, opçoes);
+		valores.put(key, opçoes);
 	}
 
 	public String preencheFormulario(String key, String respPergunta) {
