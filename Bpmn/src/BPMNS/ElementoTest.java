@@ -159,6 +159,7 @@ public class ElementoTest {
 	@Test
 	public void newflux() throws Exception{
 	BPMNElemento elemento = new BPMNElemento();
+	elemento.nomeDoFluxo("Fluxo Venda Refrigerante");
 	elemento.adicionaElemento(new StartEvent("Inicio"));
 	elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
 	elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
@@ -178,62 +179,22 @@ public class ElementoTest {
 	elemento.connect("Realizar Pagamento",new String[] {"Entrega Refrigerante"});
 	elemento.connect("Entrega Refrigerante",new String[] {"fim"});
 	
-	elemento.campoFormulario("Solicitar Refrigerante", new String[] {"Guarana", "Coca-Cola", "Fanta"});
+	//elemento.campoFormulario("Solicitar Refrigerante", new String[] {"Guarana", "Coca-Cola", "Fanta"});
 	elemento.campoFormulario("Verificar Disponibilidade", new String[] {"Guarana", "Coca-Cola", "Fanta"});
 	elemento.campoFormulario("Verificar Dinheiro Disponivel", new String[] {"há dinheiro", "não há dinheiro"});
-	
-	elemento.getNextElement("inicio");
-	elemento.preencheFormulario("Solicitar Refrigerante" , "Guarana");
-	elemento.getNextElement("Solicitar Refrigerante");
-	elemento.preencheFormulario("Verificar Disponibilidade", "Guarana");
-	elemento.getNextElement("Verificar Disponibilidade");
-	elemento.getNextElement("Disponivel?");
-	elemento.preencheFormulario("Verificar Dinheiro Disponivel", "não há dinheiro");
-	elemento.getNextElement("Verificar Dinheiro Disponivel");
-	elemento.getNextElement("Dinheiro Disponivel?");
+	//elemento.getNextElement("inicio");
+	Assert.assertEquals("Solicitar Refrigerante", elemento.getNextElement("Inicio"));
+	Assert.assertEquals("Verificar Disponibilidade", elemento.getNextElement("Solicitar Refrigerante"));
+	//elemento.preencheFormulario("Solicitar Refrigerante" , "sukita");
+	Assert.assertEquals("Disponivel?", elemento.getNextElement("Verificar Disponibilidade"));
+	elemento.preencheFormulario("Verificar Disponibilidade" , "Guarana");
+	Assert.assertEquals("Verificar Dinheiro Disponivel", elemento.getNextElement("Disponivel?"));
+	Assert.assertEquals("Dinheiro Disponivel?", elemento.getNextElement("Verificar Dinheiro Disponivel"));
+	elemento.preencheFormulario("Verificar Dinheiro Disponivel" , "não há dinheiro");
 	Assert.assertEquals("fim", elemento.getNextElement("Dinheiro Disponivel?"));
 	
-	
-	
-	
-	
-//	Assert.assertEquals("Verificar Dinheiro Disponivel", elemento.getNextElement("Disponivel?"));
-	
-	
-	}
-	
-	
 
-//	@Test
-//	public void happy_FLUXO_SE_HT_EG_EE() throws Exception{
-//		BPMNElemento elemento = new BPMNElemento();
-//		elemento.adicionaElemento(new StartEvent("inicio"));
-//		elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
-//		elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
-//		elemento.adicionaElemento(new ExclusiveGateway("Desvio Exclusivo"));
-//		elemento.adicionaElemento(new HumanTask("Renova"));
-//		elemento.adicionaElemento(new EndEvent("fim"));
-//		elemento.connect("inicio",new String[] {"Solicitar Refrigerante"});
-//		elemento.connect("Solicitar Férias",new String[] {"Verificar Disponibilidade" } );
-//		elemento.connect("Desvio Exclusivo",new String[] {"renova", "fim"});
-//		elemento.getNextElement("inicio");
-//		elemento.getNextElement("Solicitar Férias");
-//		elemento.getNextElement("Desvio Exclusivo");
-//		Assert.assertEquals("fim", elemento.getNextElement("Desvio Exclusivo"));
-//		Assert.assertEquals("Atendeu a Solicitação", elemento.correctMSG("pergunta"));
-//		
-//		
-//		
-//	}
-	
-//	@Test
-//	public void adicionaVar() throws Exception{
-//	BPMNElemento elemento = new BPMNElemento();
-//	elemento.adicionaVariaveis(new String[] {"disponivel/boolean","msg/String"});
-//	
-//	
-//	
-//	}
+	}
 	
 }	
 	
