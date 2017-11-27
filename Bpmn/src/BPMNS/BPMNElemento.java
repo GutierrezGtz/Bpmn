@@ -59,7 +59,7 @@ public class BPMNElemento {
 	
 //------------------------------>>> METODO NEXT's <<<-----------------------------	
 	
-	public Object getNextElement(String string) {
+	public String getNextElement(String string) {
 		
 		if(resposta == false) {
 			connector.containsKey(string);
