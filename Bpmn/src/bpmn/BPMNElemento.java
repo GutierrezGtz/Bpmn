@@ -1,8 +1,7 @@
-package BPMNS;
+package bpmn;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 
 public class BPMNElemento {
@@ -13,13 +12,16 @@ public class BPMNElemento {
 	HashMap<String, String[]> valores = new HashMap<>();
 
 	String[] listaDeOpçoes;
-	Scanner s = new Scanner(System.in);
 	private boolean resposta = true;
+
+	private EndEvent endEvent;
+	private String respPergunta;
 	
 //------------------------------>>>METODOS ADICIONA<<<-----------------------------	
 
 	public void adicionaElemento(HumanTask humanTask) {
-		lista.add(humanTask.getName());	
+		lista.add(humanTask.getName());
+		
 	}
 	
 	public void adicionaElemento(StartEvent startEvent) {
@@ -28,6 +30,7 @@ public class BPMNElemento {
 
 	public void adicionaElemento(EndEvent endEvent) {
 		lista.add(endEvent.getName());
+		this.endEvent = endEvent;
 	}
 	
 	public void adicionaElemento(ExclusiveGateway exclusiveGateway) {
@@ -63,13 +66,21 @@ public class BPMNElemento {
 		
 		if(resposta == false) {
 			connector.containsKey(string);
-			return connector.get(string)[1];
+			if(connector.get(string)[1].equals(endEvent.getName())) {
+				return respPergunta;
+			}else {
+				return connector.get(string)[1];
+			}
 		}else {
 			connector.containsKey(string);
-			return connector.get(string)[0];
+			if(connector.get(string)[0].equals(endEvent.getName())) {
+				return respPergunta;
+			}else {
+				return connector.get(string)[0];
+			}
 		}
 	}
-	
+
 //------------------------------>>> FORMULARIO <<<<--------------------------------
 	
 	public void campoFormulario(String key, String[] opçoes) {
@@ -78,7 +89,8 @@ public class BPMNElemento {
 	}
 
 	public boolean preencheFormulario(String key, String respPergunta) {
-		if(respPergunta == valores.get(key)[0]){//posso fazer o metodo recebendo um for int i que retorna o valores.get(key)[i]
+		this.respPergunta = respPergunta;
+		if(respPergunta == valores.get(key)[0]){
 			return resposta = true;	
 		}
 		return resposta = false;
@@ -86,7 +98,6 @@ public class BPMNElemento {
 //------------------------------>>> NOME FLUXO <<<----------------------------------
 	
 	public String nomeDoFluxo(String nome) {
-		return nome;
-		
+		return nome;	
 	}
 }

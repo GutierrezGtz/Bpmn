@@ -1,4 +1,4 @@
-package BPMNS;
+package bpmn;
 
 public class ExclusiveGateway {
 
