@@ -100,4 +100,8 @@ public class BPMNElemento {
 	public String nomeDoFluxo(String nome) {
 		return nome;	
 	}
+	
+	
+	
+	
 }

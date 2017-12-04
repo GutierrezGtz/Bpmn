@@ -11,8 +11,9 @@ public class Teste1 {
 	static ArrayList<String> elementosEG = new ArrayList<String>();
 	static ArrayList<String> elementosEE = new ArrayList<String>();
 	private static String[] op;
+	private static int numeroDeSetas;
 	public static void main(String[] args) throws Exception {
-
+		int number;
 		Scanner ler = new Scanner(System.in);
 		BPMNElemento b = new BPMNElemento();
 
@@ -28,7 +29,8 @@ public class Teste1 {
 	                +" 1 - Adicionar Elementos\n"
 	                +" 2 - Conectar Elementos\n"
 	                +" 3 - START FLUXO\n"
-	                +" 4 - Sair\n"
+	                +" 4 - Mostrar Fluxo\n"
+	                +" 5 - Sair\n"
 					);
 			int menu = ler.nextInt();
 			switch (menu) { 
@@ -43,14 +45,14 @@ public class Teste1 {
 				switch (elemento) {
 				     case 1://----- SE ------
 				    	 System.out.println("Digite o nome do Elemento: ");
-				    	 nomeElemento  = ler.nextLine();
+				    	 nomeElemento  = ler.next();
 				    	 b.adicionaElemento(new StartEvent(nomeElemento));
 				    	 elementosSE.add(nomeElemento);
 				         break;
 				         
 				     case 2://----- HT ------
 				    	 System.out.println("Digite o nome do Elemento: ");
-				    	 nomeElemento  = ler.nextLine();
+				    	 nomeElemento  = ler.next();
 				    	 b.adicionaElemento(new HumanTask(nomeElemento));
 				    	 System.out.println("FORMULARIO ");
 				    	 	System.out.println("Digite o numero de campos: ");
@@ -67,14 +69,14 @@ public class Teste1 {
 				         
 				     case 3://----- EG ------
 				    	 System.out.println("Digite o nome do Elemento: ");
-				    	 nomeElemento  = ler.nextLine();
+				    	 nomeElemento  = ler.next();
 				    	 b.adicionaElemento(new ExclusiveGateway(nomeElemento));
 				    	 elementosEG.add(nomeElemento);
 				         break;
 				         
 				     case 4://----- EE ------
 				    	 System.out.println("Digite o nome do Elemento: ");
-				    	 nomeElemento  = ler.nextLine();
+				    	 nomeElemento  = ler.next();
 				    	 b.adicionaElemento(new EndEvent(nomeElemento));
 				    	 elementosEE.add(nomeElemento);
 				         break;
@@ -134,7 +136,7 @@ public class Teste1 {
 
 		    	 
 		    	 System.out.println("Digite o nome do Elemento Key: " );
-		    	 String key = ler.nextLine();
+		    	 String key = ler.next();
 		    	 System.out.println("Digite a quantidade de elementos conectados: " );
 		    	 int numeroElementos = ler.nextInt();
 		    	 String[] strings = new String[numeroElementos];
@@ -143,14 +145,14 @@ public class Teste1 {
 		    		 strings[i] =  ler.next();
 		    	 }
 		    	 b.connect(key, strings);
-		    	 
+		    	 numeroDeSetas = strings.length;
 		    	 
 		         break;
 		         
 		     case 3://--------------------->>>START FLUXO<<<--------------------------
 		    	 	System.out.println("-------------Inicio Do Fluxo!-----------------");	
 		    	 	System.out.println("Defina Elemento de Inicio: ");
-		    	 	String inicioElement = ler.nextLine();
+		    	 	String inicioElement = ler.next();
 		    	 	String elementoPos = b.getNextElement(inicioElement);
 	    	 		for(int i = 0; i < elementosHT.size(); i++) {
 		    	 		if(elementosHT.contains(elementoPos)) {
@@ -167,15 +169,36 @@ public class Teste1 {
 	    	 		
 		         break;
 		         
-		     case 4://------->>>SAIR<<<--------
-		    	 //precisa de saidas para voltar no menu!
+		     case 4:
 		    	 
+		    	System.out.println("Seu Fluxo: ");
+		    	for(int i = 0; i <elementosSE.size(); i++ ) {
+		    		System.out.print(elementosSE.get(i));
+		    		System.out.println("---->" + b.connector.get(elementosSE.get(i))[0]);
+		    		for(int j = 1; j < b.connector.get(elementosSE.get(i)).length; j++ ) {
+			    			if(b.connector.get(elementosSE.get(i)).length > 1) {
+			    				String[] pos = b.connector.get(elementosSE.get(i));
+			    				System.out.println(" ---->" + (pos)[j]);
+			    				for(int k = 0; k <  b.connector.get(pos[j]).length; k++) {
+			    					
+			    					
+			    				}
+			    			}
+			    			
+		    		}
+		    		
+		    	}
+		    	 
+		         break;
+		     
+			case 5://------->>>SAIR<<<--------
+		    	 //precisa de saidas para voltar no menu!
 		    	 
 		    	 	System.exit(0);
 		         break;
-		    
 		     default:
-		          	System.out.println(" Opção inexistente! Tente novamente.\n\n");
+		          	System.out.println("\n"
+		          			+ "\n Opção inexistente! Tente novamente.\n\n");
 			}
 			System.out.println(
 					"SE: "+elementosSE
