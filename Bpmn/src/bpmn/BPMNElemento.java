@@ -1,5 +1,8 @@
 package bpmn;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,12 +13,16 @@ public class BPMNElemento {
 	
 	HashMap<String, String[]> connector = new HashMap<>();
 	HashMap<String, String[]> valores = new HashMap<>();
-
+	
+	ArrayList<Object> listaFluxos = new ArrayList<>();
+	
 	String[] listaDeOpçoes;
 	private boolean resposta = true;
 
 	private EndEvent endEvent;
 	private String respPergunta;
+
+	private String nome;
 	
 //------------------------------>>>METODOS ADICIONA<<<-----------------------------	
 
@@ -95,13 +102,33 @@ public class BPMNElemento {
 		}
 		return resposta = false;
 	}
+	
 //------------------------------>>> NOME FLUXO <<<----------------------------------
 	
 	public String nomeDoFluxo(String nome) {
+		this.nome = nome;
 		return nome;	
 	}
 	
+//------------------------------>>> CADASTRA FLUXO <<<----------------------------------- 	
 	
+	public void cadastraFluxo() throws IOException {
+		FileWriter arq = new FileWriter("C:\\Users\\matheus.villegas\\Downloads\\eclipse\\listaDeFluxos.txt");
+	    PrintWriter gravarArq = new PrintWriter(arq);
+		
+	    listaFluxos.add(nome);
+	    
+	    
+		gravarArq.printf("%4d"
+				+ " %3d"
+				+ " %2d"
+				+ " %d", nome, lista, connector, valores);
+	    
+		
+		arq.close();
+		System.out.print("\n Fluxo foi gravado com sucesso em \"listaDeFluxos.txt\".\n");
+	    
+	}
 	
 	
 }
