@@ -1,15 +1,13 @@
 package bpmn;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Teste1 {
 	
-	private static String nomeElemento;
-	static ArrayList<String> elementosSE = new ArrayList<String>();
-	static ArrayList<String> elementosHT = new ArrayList<String>();
-	static ArrayList<String> elementosEG = new ArrayList<String>();
-	static ArrayList<String> elementosEE = new ArrayList<String>();
+	
+	
+	
+	
 	private static String[] op;
 	
 	public static void main(String[] args) throws Exception {
@@ -54,15 +52,15 @@ public class Teste1 {
 						switch (elemento) {
 						     case 1://----- SE ------
 						    	 System.out.println("Digite o nome do Elemento: ");
-						    	 nomeElemento  = ler.next();
-						    	 b.adicionaElemento(new StartEvent(nomeElemento));
-						    	 elementosSE.add(nomeElemento);
+						    	 b.nomeElemento  = ler.next();
+						    	 b.adicionaElemento(new StartEvent(b.nomeElemento));
+						    	 b.elementosSE.add(b.nomeElemento);
 						         break;
 						         
 						     case 2://----- HT ------
 						    	 System.out.println("Digite o nome do Elemento: ");
-						    	 nomeElemento  = ler.next();
-						    	 b.adicionaElemento(new HumanTask(nomeElemento));
+						    	 b.nomeElemento  = ler.next();
+						    	 b.adicionaElemento(new HumanTask(b.nomeElemento));
 						    	 System.out.println("FORMULARIO ");
 						    	 	System.out.println("Digite o numero de campos: ");
 						    	 	int rec = ler.nextInt();
@@ -70,24 +68,24 @@ public class Teste1 {
 						    	 	for(int i = 0; i < rec; i++) {
 						    	 		System.out.println("Digite o nome do campo: ");
 							    	 	String rec2 = ler.next();
-						    	 		op[i] = rec2;//aqui
-						    	 	b.campoFormulario(nomeElemento, op);
+						    	 		op[i] = rec2;//aqui nome do campo + o tipo do campo(case 1 int case 2 texto case 3 lista)
+						    	 	b.campoFormulario(b.nomeElemento, op);
 						    	 	}
-						    	 elementosHT.add(nomeElemento);
+						    	 b.elementosHT.add(b.nomeElemento);
 						         break;
 						         
 						     case 3://----- EG ------
 						    	 System.out.println("Digite o nome do Elemento: ");
-						    	 nomeElemento  = ler.next();
-						    	 b.adicionaElemento(new ExclusiveGateway(nomeElemento));
-						    	 elementosEG.add(nomeElemento);
+						    	 b.nomeElemento  = ler.next();
+						    	 b.adicionaElemento(new ExclusiveGateway(b.nomeElemento));
+						    	 b.elementosEG.add(b.nomeElemento);
 						         break;
 						         
 						     case 4://----- EE ------
 						    	 System.out.println("Digite o nome do Elemento: ");
-						    	 nomeElemento  = ler.next();
-						    	 b.adicionaElemento(new EndEvent(nomeElemento));
-						    	 elementosEE.add(nomeElemento);
+						    	 b.nomeElemento  = ler.next();
+						    	 b.adicionaElemento(new EndEvent(b.nomeElemento));
+						    	 b.elementosEE.add(b.nomeElemento);
 						         break;
 						         
 						     default:
@@ -118,8 +116,8 @@ public class Teste1 {
 		    	 	System.out.println("Defina Elemento de Inicio: ");
 		    	 	String inicioElement = ler.next();
 		    	 	String elementoPos = b.getNextElement(inicioElement);
-	    	 		for(int i = 0; i < elementosHT.size(); i++) {//verificar##
-		    	 		if(elementosHT.contains(elementoPos)) {
+	    	 		for(int i = 0; i < b.elementosHT.size(); i++) {//verificar##
+		    	 		if(b.elementosHT.contains(elementoPos)) {
 		    	 			System.out.println("Preencha os campos: ");
 		    	 			for(int j = 0; j < op.length; j++ ) {
 		    	 				System.out.println(op[j] +":");
@@ -137,12 +135,12 @@ public class Teste1 {
 		     case 3:
 		    	 
 		    	System.out.println("Seu Fluxo: ");
-		    	for(int i = 0; i <elementosSE.size(); i++ ) {
-		    		System.out.print(elementosSE.get(i));
-		    		System.out.println("---->" + b.connector.get(elementosSE.get(i))[0]);
-		    		for(int j = 1; j < b.connector.get(elementosSE.get(i)).length; j++ ) {
-			    			if(b.connector.get(elementosSE.get(i)).length > 1) {
-			    				String[] pos = b.connector.get(elementosSE.get(i));
+		    	for(int i = 0; i <b.elementosSE.size(); i++ ) {
+		    		System.out.print(b.elementosSE.get(i));
+		    		System.out.println("---->" + b.connector.get(b.elementosSE.get(i))[0]);
+		    		for(int j = 1; j < b.connector.get(b.elementosSE.get(i)).length; j++ ) {
+			    			if(b.connector.get(b.elementosSE.get(i)).length > 1) {
+			    				String[] pos = b.connector.get(b.elementosSE.get(i));
 			    				System.out.println(" ---->" + (pos)[j]);
 			    				for(int k = 0; k <  b.connector.get(pos[j]).length; k++) {
 			    					
@@ -166,10 +164,10 @@ public class Teste1 {
 		          			+ "\n Opção inexistente! Tente novamente.\n\n");
 			}
 			System.out.println(
-					"SE: "+elementosSE
-					+"  HT: "+elementosHT
-					+"  EG: "+elementosEG
-					+"  EE: "+elementosEE);
+					"SE: "+b.elementosSE
+					+"  HT: "+b.elementosHT
+					+"  EG: "+b.elementosEG
+					+"  EE: "+b.elementosEE);
 
 		}
 	}

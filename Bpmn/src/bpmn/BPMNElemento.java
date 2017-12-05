@@ -14,9 +14,17 @@ public class BPMNElemento {
 	HashMap<String, String[]> connector = new HashMap<>();
 	HashMap<String, String[]> valores = new HashMap<>();
 	
+	ArrayList<String> elementosSE = new ArrayList<String>();
+	ArrayList<String> elementosHT = new ArrayList<String>();
+	ArrayList<String> elementosEG = new ArrayList<String>();
+	ArrayList<String> elementosEE = new ArrayList<String>();
+	String nomeElemento;
+	
+	
+	
 	ArrayList<Object> listaFluxos = new ArrayList<>();
 	
-	String[] listaDeOpçoes;
+	String[] listaDeOpcoes;
 	private boolean resposta = true;
 
 	private EndEvent endEvent;
@@ -90,9 +98,9 @@ public class BPMNElemento {
 
 //------------------------------>>> FORMULARIO <<<<--------------------------------
 	
-	public void campoFormulario(String key, String[] opçoes) {
-		listaDeOpçoes = opçoes;
-		valores.put(key, opçoes);
+	public void campoFormulario(String key, String[] opcoes) {
+		listaDeOpcoes = opcoes;
+		valores.put(key, opcoes);
 	}
 
 	public boolean preencheFormulario(String key, String respPergunta) {
