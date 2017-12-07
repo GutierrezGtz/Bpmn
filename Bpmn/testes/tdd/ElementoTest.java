@@ -1,4 +1,4 @@
-package bpmn;
+package tdd;
 
 import java.util.Scanner;
 
@@ -6,6 +6,12 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import bpmn.BPMNElemento;
+import bpmn.EndEvent;
+import bpmn.ExclusiveGateway;
+import bpmn.HumanTask;
+import bpmn.StartEvent;
 
 
 public class ElementoTest {

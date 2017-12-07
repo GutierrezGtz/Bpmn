@@ -15,14 +15,14 @@ public class Main {
 		BPMNElemento b = new BPMNElemento();
 
 		//---------------------------------------------------------------------
-		System.out.println("Nome Do Fluxo?");
-		String nome = ler.next();
-		b.nomeDoFluxo(nome);
+//		System.out.println("Nome Do Fluxo?");
+//		String nome = ler.next();
+//		b.nomeDoFluxo(nome);
 		
 
 		while(true) {
 			System.out.println("\nBPM(Matheus)\n");
-			System.out.println(nome);			
+			//System.out.println(nome);			
 			System.out.println("Escolha uma das seguintes opcoes:\n\n"
 				                +" 1 - CADASTRO\n"
 				                +" 2 - START FLUXO\n"
@@ -115,36 +115,35 @@ public class Main {
 					         
 					         
 					    case 3://------------------>>>Salva Fluxo<<<----------------------
-					    	System.out.println("Digite o Nome Do Fluxo: ");
-					    	b.nomeFluxo = ler.next();
 					    	boolean t = true;
 					    	while(t) {
+					    		System.out.println("Digite o Nome Do Fluxo: ");
+					    		b.nomeFluxo = ler.next();
 						    	if(!b.listaFluxos.contains(b.nomeFluxo)) {
 						    		b.listaFluxos.add(b.nomeFluxo);
+						    		Fluxo flux = new Fluxo(b.nomeFluxo);
+						    		flux.DefinirNome(b.nomeFluxo);
+						    		b.save(flux);
 						    		t = false;
+						    		
+						    		
 						    	}else {
 						    		System.out.println("Ja existe um fluxo com este Nome!");
 						    	}
 					    	}
-					    	Fluxo f = new Fluxo();
-
+					    	
+					    	
+					    	
 					    	
 //					    	b.connector;
 //					    	b.lista;
-//					    	b.valores;
-					    	
+//					    	b.valores;			    	
 //					    	b.elementosEE;
 //					     	b.elementosEG;
 //					    	b.elementosHT;
 //					    	b.elementosSE;
-
 					    	
 
-					    	b.save();
-					    	
-					    	
-					    	
-					    	
 					         break;
 					         
 					    case 4://---------------->>>Volta Menu Principal<<<---------------

@@ -1,10 +1,12 @@
 package bpmn;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class BPMNElemento {
+	Persistencia p = new Persistencia();
 
 	ArrayList<Object> lista = new ArrayList<>();
 	
@@ -117,9 +119,8 @@ public class BPMNElemento {
 	
 //------------------------------>>> CADASTRA/SALVA FLUXO <<<----------------------------------- 	
 	
-	public void save() {
-		
-		
+	public void save(Fluxo flux) throws IOException {
+		p.save(flux, "C:\\Users\\matheus.villegas\\Downloads\\eclipse\\listaDeFluxos.txt");
 		
 	}
 	
