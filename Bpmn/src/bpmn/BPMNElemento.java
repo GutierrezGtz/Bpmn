@@ -19,7 +19,7 @@ public class BPMNElemento {
 	ArrayList<String> elementosEE = new ArrayList<String>();
 	String nomeElemento;
 	
-	ArrayList<Object> listaFluxos = new ArrayList<>();
+	ArrayList<Object> listaFluxos = p.linhas2;
 	
 	String[] listaDeOpcoes;
 	private boolean resposta = true;
@@ -117,14 +117,22 @@ public class BPMNElemento {
 
 	
 	
-//------------------------------>>> CADASTRA/SALVA FLUXO <<<----------------------------------- 	
+//------------------------------>>> LE/SALVA FLUXO <<<----------------------------------- 	
 	
-	public void save(Fluxo flux) throws IOException {
-		p.save(flux, "C:\\Users\\matheus.villegas\\Downloads\\eclipse\\listaDeFluxos.txt");
-		
+	public void ler(Fluxo flux) throws IOException {
+		p.ler(flux);
 	}
 	
 	
+	public void save(Fluxo flux) throws IOException {
+		p.save(flux);
+	}
+
+	public void lerInicial(Fluxo flux) throws IOException {
+		p.ler2(flux);
+	}
+	
+
 	
 	
 }

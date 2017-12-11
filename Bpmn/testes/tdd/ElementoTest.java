@@ -196,8 +196,10 @@ public class ElementoTest {
 	elemento.preencheFormulario("Verificar Dinheiro Disponivel" , "não há dinheiro");
 	Assert.assertEquals("não há dinheiro", elemento.getNextElement("Dinheiro Disponivel?"));
 	}
+	
+	
+	@Test
+	public void TestMainClass() throws Exception {
+		//testar main **
+	}
 }	
-	
-
-	
-

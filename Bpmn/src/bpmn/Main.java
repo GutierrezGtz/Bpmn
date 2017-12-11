@@ -3,13 +3,12 @@ package bpmn;
 import java.util.Scanner;
 
 public class Main {
-	
-	
-	
-	
-	
+
 	private static String[] op;
-	
+	private static String inicioElement;
+	private static String elementoPos;
+	static Fluxo flux = new Fluxo();
+
 	public static void main(String[] args) throws Exception {
 		Scanner ler = new Scanner(System.in);
 		BPMNElemento b = new BPMNElemento();
@@ -18,23 +17,23 @@ public class Main {
 //		System.out.println("Nome Do Fluxo?");
 //		String nome = ler.next();
 //		b.nomeDoFluxo(nome);
-		
+
 
 		while(true) {
+			b.lerInicial(flux);
 			System.out.println("\nBPM(Matheus)\n");
-			//System.out.println(nome);			
+			System.out.println(flux.getNome());			
 			System.out.println("Escolha uma das seguintes opcoes:\n\n"
 				                +" 1 - CADASTRO\n"
 				                +" 2 - START FLUXO\n"
 				                +" 3 - Mostrar Fluxo\n"
-				                +" 4 - Sair\n"
+				                +" 4 - Carregar Fluxo\n"
+				                +" 5 - Sair\n"
 								);
 			int menu = ler.nextInt();
 			
 			switch (menu) { 
-			
-			
-			
+
 			case 1://----------------->>>CADASTRO<<<-----------------------------------
 				boolean continuar = true;
 				while(continuar) {
@@ -46,7 +45,7 @@ public class Main {
 					int menuCadastro = ler.nextInt();
 					
 					switch(menuCadastro) {
-						case 1://--------------->>>Adicionar Elementos<<<---------------------
+						case 1://--------------->>>ADD Elementos<<<---------------------
 							System.out.println("\n Escolha uma das seguintes opcoes:\n\n"
 					                +" 1 - StartEvent\n"
 					                +" 2 - HumanTask\n"
@@ -74,7 +73,10 @@ public class Main {
 							    	 		System.out.println("Digite o nome do campo: ");
 								    	 	String rec2 = ler.next();
 							    	 		op[i] = rec2;//aqui nome do campo + o tipo do campo(case 1 int case 2 texto case 3 lista)
-							    	 	b.campoFormulario(b.nomeElemento, op);
+							    	 		
+							    	 		
+							    	 		
+							    	 		b.campoFormulario(b.nomeElemento, op);
 							    	 	}
 							    	 b.elementosHT.add(b.nomeElemento);
 							         break;
@@ -121,8 +123,8 @@ public class Main {
 					    		b.nomeFluxo = ler.next();
 						    	if(!b.listaFluxos.contains(b.nomeFluxo)) {
 						    		b.listaFluxos.add(b.nomeFluxo);
-						    		Fluxo flux = new Fluxo(b.nomeFluxo);
-						    		flux.DefinirNome(b.nomeFluxo);
+						    		flux = new Fluxo(b.nomeFluxo);
+						    		flux.setNome(b.nomeFluxo);
 						    		b.save(flux);
 						    		t = false;
 						    		
@@ -130,19 +132,7 @@ public class Main {
 						    	}else {
 						    		System.out.println("Ja existe um fluxo com este Nome!");
 						    	}
-					    	}
-					    	
-					    	
-					    	
-					    	
-//					    	b.connector;
-//					    	b.lista;
-//					    	b.valores;			    	
-//					    	b.elementosEE;
-//					     	b.elementosEG;
-//					    	b.elementosHT;
-//					    	b.elementosSE;
-					    	
+					    	} 	
 
 					         break;
 					         
@@ -164,14 +154,19 @@ public class Main {
 				
 		    case 2://--------------------->>>START FLUXO<<<--------------------------
 		    	 	System.out.println("-------------Inicio Do Fluxo!-----------------");	
-		    	 	System.out.println("Defina Elemento de Inicio: ");
-		    	 	String inicioElement = ler.next();
-		    	 	String elementoPos = b.getNextElement(inicioElement);
+		    	 	if(b.elementosSE.get(1) != null ) {
+			    	 	System.out.println("Defina Elemento de Inicio: ");
+			    	 	inicioElement = ler.next();
+			    	 	elementoPos = b.getNextElement(inicioElement);
+		    	 	}else if(b.elementosSE.get(1) == null ) {
+		    	 		inicioElement = b.elementosSE.get(0);
+		    	 		elementoPos = b.getNextElement(inicioElement);
+		    	 	}
 	    	 		for(int i = 0; i < b.elementosHT.size(); i++) {//verificar##
 		    	 		if(b.elementosHT.contains(elementoPos)) {
-		    	 			System.out.println("Preencha os campos: ");
+		    	 			System.out.println("Escreva o Campo de sua Escolha:");
 		    	 			for(int j = 0; j < op.length; j++ ) {
-		    	 				System.out.println(op[j] +":");
+		    	 				System.out.println(op[j]);
 		    	 				
 		    	 			}
 		    	 			String respFormulario = ler.next();
@@ -180,7 +175,6 @@ public class Main {
 		    	 		elementoPos = b.getNextElement(elementoPos);
 	    	 		}
 	    	 		System.out.println(elementoPos);
-	    	 		
 		         break;
 		         
 		    case 3://-----------------------LISTAR FLUXOS-----------------------------------
@@ -195,19 +189,29 @@ public class Main {
 			    				System.out.println(" ---->" + (pos)[j]);
 			    				for(int k = 0; k <  b.connector.get(pos[j]).length; k++) {		
 			    				}
-			    			}	
+			    			}
 		    		}
-		    		
 		    	}
 		         break;
-		     
-			case 4://------->>>SAIR<<<--------
-		    	 	System.exit(0);
-		         break;
+		         
+		    case 4://------->>>CARREGAR FLUXO<<<--------
+		    	System.out.println("Digite o Nome Do Fluxo: ");
+		    	String rVer = ler.next();
+		    		if(b.listaFluxos.contains(rVer)) {
+		    			flux.setVerificadorDeNome(rVer);
+		    			b.ler(flux);
+		    		}else {
+		    			System.out.println("Não existe um fluxo com este Nome!");
+		    		} 	
+	         break;
+	         
+			case 5://------->>>SAIR<<<--------
+	    	 	System.exit(0);
+		        break;
 		         
 		     default:
-		          	System.out.println("\n"
-		          			+ "\n Opcao inexistente! Tente novamente.\n\n");
+	          	System.out.println("\n"
+	          			+ "\n Opcao inexistente! Tente novamente.\n\n");
 			}
 			System.out.println(
 					"SE: "+b.elementosSE

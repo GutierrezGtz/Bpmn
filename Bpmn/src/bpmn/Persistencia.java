@@ -1,78 +1,110 @@
 package bpmn;
 
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.ObjectOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 
 
 public class Persistencia {
 	
-	public void save(Object objeto, String caminho) {
-		
-			 
-	           try {
-	       		FileWriter arq = new FileWriter(caminho);
-	    	    PrintWriter gravarArq = new PrintWriter(arq);
-	 
-	              // salva o objeto
-	    	    gravarArq.write(objeto);
-	 
-	    	    gravarArq.close();
-	           } catch (Exception exc) {
-	             exc.printStackTrace();
-	           }
-	    }
+	static String[] linhas;
 	
+	ArrayList<Object> linhas2 = new ArrayList<>();
+	
+	static void ler(Fluxo flux) {
+		File dir = new File("C:\\Users\\matheus.villegas\\Downloads\\eclipse");
+		File arq = new File(dir, flux.getVerificadorDeNome() + ".txt");
 
-	 
-		
-		
-		
-		
-		
-//	  FileOutputStream saveFile = new FileOutputStream(caminho);
-//      ObjectOutputStream stream = new ObjectOutputStream(saveFile);
-		
-//		String caminho = "C:\\Users\\matheus.villegas\\Downloads\\eclipse\\listaDeFluxos.txt";
-//		FileWriter arq = new FileWriter(caminho, true);
-//	    PrintWriter gravarArq = new PrintWriter(arq);
-//	   
-//
-//	    Fluxo f = new Fluxo();
-//	    gravarArq.println(f);
-//	    
-//	   // gravarArq.write(f.ObterNome().toString());
-//	    
-//	 
-//	    
-////	    String nome, HashMap<String, String[]> connector, HashMap<String, String[]> valores, 
-////		ArrayList<Object> lista, ArrayList<String> elementosSE,  ArrayList<String> elementosHT,
-////		ArrayList<String> elementosEG,  ArrayList<String> elementosEE 
-////    	b.connector;
-////    	b.lista;
-////    	b.valores;			    	
-////    	b.elementosEE;
-////     	b.elementosEG;
-////    	b.elementosHT;
-////    	b.elementosSE;   
-////	    listaFluxos.add(nome);
-//	    
-////		gravarArq.printf(
-//////				"%8d"
-//////				+ " %7d"
-//////				+ " %6d"
-//////				+ " %5d"
-//////				+ " %4d"
-//////				+ " %3d"
-//////				+ " %2d"
-////				 " %d", flux);
-////	    
-//		gravarArq.flush();  
-//		gravarArq.close();  
-//		arq.close();
-//		System.out.print("\n Fluxo foi gravado com sucesso em \"listaDeFluxos.txt\".\n");
-//	    
-//	}
+	    try {
+	        FileReader fileReader = new FileReader(arq);
+	        BufferedReader bufferedReader = new BufferedReader(fileReader);
+	        
+	        String linha = "";
+	        int i = 0;
+	        while ( ( linha = bufferedReader.readLine() ) != null) {
+	        	linhas[i] = linha;
+	        	flux.recebendoDados(linhas);
+	        	i++;
+	        }
+	        fileReader.close();
+	        bufferedReader.close();
+	        
+		} catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	}
 
-}
+
+
+	static void save(Fluxo flux) {
+        File dir = new File("C:\\Users\\matheus.villegas\\Downloads\\eclipse");
+        String nomeArquivo = flux.getNome();
+        
+        File arq = new File(dir, nomeArquivo + ".txt");
+       
+        try {
+            arq.createNewFile();
+
+            FileWriter fileWriter = new FileWriter(arq, false);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            printWriter.println(flux.getNome());
+
+            printWriter.flush();
+            printWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        File arq2 = new File(dir, "ListaDeFluxos.txt");
+	       
+        try {
+        	arq2.createNewFile();
+        	
+       		FileWriter fw = new FileWriter(arq2, true);
+			BufferedWriter conexao = new BufferedWriter(fw);
+			
+			conexao.write(flux.getNome());
+			conexao.newLine();
+			
+			conexao.close();
+       		
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+	public void ler2(Fluxo flux) {
+		File dir = new File("C:\\Users\\matheus.villegas\\Downloads\\eclipse");
+		File arq = new File(dir, "ListaDeFluxos.txt");
+		
+		 try {
+		        FileReader fileReader = new FileReader(arq);
+		        BufferedReader bufferedReader = new BufferedReader(fileReader);
+		        
+		        String linha2 = "";
+		        
+		        while ( ( linha2 = bufferedReader.readLine() ) != null) {
+		        	linhas2.add(linha2);
+		        }
+		        
+		        fileReader.close();
+		        bufferedReader.close();
+		        
+			} catch (IOException e) {
+		    	e.printStackTrace();
+		    }
+		}
+		
+		
+	}
