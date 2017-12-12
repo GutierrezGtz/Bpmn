@@ -10,6 +10,7 @@ import org.junit.rules.ExpectedException;
 import bpmn.BPMNElemento;
 import bpmn.EndEvent;
 import bpmn.ExclusiveGateway;
+import bpmn.Fluxo;
 import bpmn.HumanTask;
 import bpmn.StartEvent;
 
@@ -196,10 +197,96 @@ public class ElementoTest {
 	elemento.preencheFormulario("Verificar Dinheiro Disponivel" , "não há dinheiro");
 	Assert.assertEquals("não há dinheiro", elemento.getNextElement("Dinheiro Disponivel?"));
 	}
-	
-	
 	@Test
-	public void TestMainClass() throws Exception {
-		//testar main **
+	public void newflux2() throws Exception{
+	BPMNElemento elemento = new BPMNElemento();
+	elemento.nomeDoFluxo("Fluxo Venda Refrigerante");
+	elemento.adicionaElemento(new StartEvent("Inicio"));
+	elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
+	elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
+	elemento.adicionaElemento(new ExclusiveGateway("Disponivel?"));
+	elemento.adicionaElemento(new HumanTask("Verificar Dinheiro Disponivel"));
+	elemento.adicionaElemento(new EndEvent("fim"));
+	elemento.adicionaElemento(new ExclusiveGateway("Dinheiro Disponivel?"));
+	elemento.adicionaElemento(new HumanTask("Realizar Pagamento"));
+	elemento.adicionaElemento(new HumanTask("Entrega Refrigerante"));
+	
+	elemento.connect("Inicio",new String[] {"Solicitar Refrigerante"});
+	elemento.connect("Solicitar Refrigerante",new String[] {"Verificar Disponibilidade" });
+	elemento.connect("Verificar Disponibilidade",new String[] {"Disponivel?"});
+	elemento.connect("Disponivel?",new String[] {"Verificar Dinheiro Disponivel", "fim"});
+	elemento.connect("Verificar Dinheiro Disponivel",new String[] {"Dinheiro Disponivel?"});
+	elemento.connect("Dinheiro Disponivel?",new String[] {"Realizar Pagamento", "fim"});
+	elemento.connect("Realizar Pagamento",new String[] {"Entrega Refrigerante"});
+	elemento.connect("Entrega Refrigerante",new String[] {"fim"});
+	
+	//elemento.campoFormulario("Solicitar Refrigerante", new String[] {"Guarana", "Coca-Cola", "Fanta"});
+	elemento.campoFormulario("Verificar Disponibilidade", new String[] {"Guarana", "Coca-Cola", "Fanta"});
+	elemento.campoFormulario("Verificar Dinheiro Disponivel", new String[] {"há dinheiro", "não há dinheiro"});
+	//elemento.getNextElement("inicio");
+	elemento.getNextElement("Inicio");
+	elemento.getNextElement("Solicitar Refrigerante");
+	//elemento.preencheFormulario("Solicitar Refrigerante" , "sukita");
+	elemento.getNextElement("Verificar Disponibilidade");
+	elemento.preencheFormulario("Verificar Disponibilidade" , "Guarana");
+	elemento.getNextElement("Disponivel?");
+	elemento.getNextElement("Verificar Dinheiro Disponivel");
+	elemento.preencheFormulario("Verificar Dinheiro Disponivel" , "há dinheiro");
+	Assert.assertEquals("há dinheiro", elemento.getNextElement("Dinheiro Disponivel?"));
+	
 	}
+	
+	
+//	@Test
+//	public void TestLastPorqueViajeiNaIdeiaDeImplementarJaSeiQueVaiDarRuimNoSave() throws Exception {
+//		BPMNElemento elemento = new BPMNElemento();
+//		Fluxo flux = new Fluxo();
+//		elemento.nomeDoFluxo("Fluxo Venda Refrigerante");
+//		elemento.adicionaElemento(new StartEvent("Inicio"));
+//		elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
+//		elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
+//		elemento.adicionaElemento(new ExclusiveGateway("Disponivel?"));
+//		elemento.adicionaElemento(new HumanTask("Verificar Dinheiro Disponivel"));
+//		elemento.adicionaElemento(new EndEvent("fim"));
+//		elemento.adicionaElemento(new ExclusiveGateway("Dinheiro Disponivel?"));
+//		elemento.adicionaElemento(new HumanTask("Realizar Pagamento"));
+//		elemento.adicionaElemento(new HumanTask("Entrega Refrigerante"));
+//		
+//		elemento.connect("Inicio",new String[] {"Solicitar Refrigerante"});
+//		elemento.connect("Solicitar Refrigerante",new String[] {"Verificar Disponibilidade" });
+//		elemento.connect("Verificar Disponibilidade",new String[] {"Disponivel?"});
+//		elemento.connect("Disponivel?",new String[] {"Verificar Dinheiro Disponivel", "fim"});
+//		elemento.connect("Verificar Dinheiro Disponivel",new String[] {"Dinheiro Disponivel?"});
+//		elemento.connect("Dinheiro Disponivel?",new String[] {"Realizar Pagamento", "fim"});
+//		elemento.connect("Realizar Pagamento",new String[] {"Entrega Refrigerante"});
+//		elemento.connect("Entrega Refrigerante",new String[] {"fim"});
+//		
+//		elemento.save(flux);
+//	}
+//	@Test
+//	public void TestLastPorqueViajeiNaIdeiaDeImplementarJaSeiQueVaiDarRuimNoLer() throws Exception {
+//		BPMNElemento elemento = new BPMNElemento();
+//		Fluxo flux = new Fluxo();
+//		elemento.nomeDoFluxo("Fluxo Venda Refrigerante");
+//		elemento.adicionaElemento(new StartEvent("Inicio"));
+//		elemento.adicionaElemento(new HumanTask("Solicitar Refrigerante"));
+//		elemento.adicionaElemento(new HumanTask("Verificar Disponibilidade"));
+//		elemento.adicionaElemento(new ExclusiveGateway("Disponivel?"));
+//		elemento.adicionaElemento(new HumanTask("Verificar Dinheiro Disponivel"));
+//		elemento.adicionaElemento(new EndEvent("fim"));
+//		elemento.adicionaElemento(new ExclusiveGateway("Dinheiro Disponivel?"));
+//		elemento.adicionaElemento(new HumanTask("Realizar Pagamento"));
+//		elemento.adicionaElemento(new HumanTask("Entrega Refrigerante"));
+//		
+//		elemento.connect("Inicio",new String[] {"Solicitar Refrigerante"});
+//		elemento.connect("Solicitar Refrigerante",new String[] {"Verificar Disponibilidade" });
+//		elemento.connect("Verificar Disponibilidade",new String[] {"Disponivel?"});
+//		elemento.connect("Disponivel?",new String[] {"Verificar Dinheiro Disponivel", "fim"});
+//		elemento.connect("Verificar Dinheiro Disponivel",new String[] {"Dinheiro Disponivel?"});
+//		elemento.connect("Dinheiro Disponivel?",new String[] {"Realizar Pagamento", "fim"});
+//		elemento.connect("Realizar Pagamento",new String[] {"Entrega Refrigerante"});
+//		elemento.connect("Entrega Refrigerante",new String[] {"fim"});
+//		
+//		elemento.ler(flux);
+//	}
 }	

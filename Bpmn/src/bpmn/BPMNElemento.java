@@ -7,26 +7,22 @@ import java.util.HashMap;
 
 public class BPMNElemento {
 	Persistencia p = new Persistencia();
-
-	ArrayList<Object> lista = new ArrayList<>();
 	
+	ArrayList<Object> lista = new ArrayList<>();
 	HashMap<String, String[]> connector = new HashMap<>();
 	HashMap<String, String[]> valores = new HashMap<>();
-	
 	ArrayList<String> elementosSE = new ArrayList<String>();
 	ArrayList<String> elementosHT = new ArrayList<String>();
 	ArrayList<String> elementosEG = new ArrayList<String>();
 	ArrayList<String> elementosEE = new ArrayList<String>();
+	
 	String nomeElemento;
 	
 	ArrayList<Object> listaFluxos = p.linhas2;
-	
 	String[] listaDeOpcoes;
 	private boolean resposta = true;
-
 	private EndEvent endEvent;
 	private String respPergunta;
-
 	String nomeFluxo;
 	
 //------------------------------>>>METODOS ADICIONA<<<-----------------------------	

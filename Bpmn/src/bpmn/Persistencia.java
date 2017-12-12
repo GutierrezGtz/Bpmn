@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Persistencia {
 	
-	static String[] linhas;
+	static ArrayList<String> linhas;
 	
 	ArrayList<Object> linhas2 = new ArrayList<>();
 	
@@ -26,11 +26,12 @@ public class Persistencia {
 	        BufferedReader bufferedReader = new BufferedReader(fileReader);
 	        
 	        String linha = "";
-	        int i = 0;
+	        
 	        while ( ( linha = bufferedReader.readLine() ) != null) {
-	        	linhas[i] = linha;
+	        	flux.setListaFluxos(linhas);
+	        	linhas.add(linha) ;
 	        	flux.recebendoDados(linhas);
-	        	i++;
+	        	
 	        }
 	        fileReader.close();
 	        bufferedReader.close();
@@ -55,6 +56,7 @@ public class Persistencia {
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             printWriter.println(flux.getNome());
+//            printWriter.println(flux.getElementos());
 
             printWriter.flush();
             printWriter.close();

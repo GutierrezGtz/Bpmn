@@ -154,14 +154,14 @@ public class Main {
 				
 		    case 2://--------------------->>>START FLUXO<<<--------------------------
 		    	 	System.out.println("-------------Inicio Do Fluxo!-----------------");	
-		    	 	if(b.elementosSE.get(1) != null ) {
+//		    	 	if(b.elementosSE.get(1) != null ) {
 			    	 	System.out.println("Defina Elemento de Inicio: ");
 			    	 	inicioElement = ler.next();
 			    	 	elementoPos = b.getNextElement(inicioElement);
-		    	 	}else if(b.elementosSE.get(1) == null ) {
-		    	 		inicioElement = b.elementosSE.get(0);
-		    	 		elementoPos = b.getNextElement(inicioElement);
-		    	 	}
+//		    	 	}else if(b.elementosSE.get(1) == null ) {
+//		    	 		inicioElement = b.elementosSE.get(0);
+//		    	 		elementoPos = b.getNextElement(inicioElement);
+//		    	 	}
 	    	 		for(int i = 0; i < b.elementosHT.size(); i++) {//verificar##
 		    	 		if(b.elementosHT.contains(elementoPos)) {
 		    	 			System.out.println("Escreva o Campo de sua Escolha:");
@@ -172,8 +172,9 @@ public class Main {
 		    	 			String respFormulario = ler.next();
 	    	 				b.preencheFormulario(elementoPos , respFormulario);
 		    	 		} 
-		    	 		elementoPos = b.getNextElement(elementoPos);
+		    	 		
 	    	 		}
+	    	 		elementoPos = b.getNextElement(elementoPos);
 	    	 		System.out.println(elementoPos);
 		         break;
 		         
