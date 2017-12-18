@@ -1,6 +1,6 @@
 package bpmn;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,31 +16,35 @@ public class BPMNElemento {
 	ArrayList<String> elementosEG = new ArrayList<String>();
 	ArrayList<String> elementosEE = new ArrayList<String>();
 
-	String nomeElemento;
-	
 	private EndEvent endEvent;
 	private String respPergunta;
-	String nomeFluxo;
 	private String CampoTipo;
 	private boolean valida;
 	private String ultimoValor;
+	String nomeFluxo;
+	String nomeElemento;
+	
 //------------------------------>>>METODOS ADICIONA<<<-----------------------------	
 
 	public void adicionaElemento(HumanTask humanTask) {
 		lista.add(humanTask.getName());
+		elementosHT.add(humanTask.getName());
 	}
 
 	public void adicionaElemento(StartEvent startEvent) {
 		lista.add(startEvent.getName());
+		elementosSE.add(startEvent.getName());
 	}
 
 	public void adicionaElemento(EndEvent endEvent) {
 		lista.add(endEvent.getName());
 		this.endEvent = endEvent;
+		elementosEE.add(endEvent.getName());
 	}
 
 	public void adicionaElemento(ExclusiveGateway exclusiveGateway) {
 		lista.add(exclusiveGateway.getName());	
+		elementosEG.add(exclusiveGateway.getName());	
 	}
 //------------------------------>>>METODOS COUNT/CONNECT<<<-----------------------------	
 
@@ -69,20 +73,25 @@ public class BPMNElemento {
 		connector.containsKey(string);
 		if(valores.get(ultimoValor) != null && connector.get(string).length > 1 ) {//valores são opçoes e a string que entra é do next
 			if(valida == true) {
-				if(connector.get(string)[1].equals(endEvent.getName())) {
+				if(connector.get(string)[0].equals(endEvent.getName())) {
 					return string + ", " + respPergunta;
 				}
 			}else if(valida == false) {
-				if(connector.get(string)[0].equals(endEvent.getName())) {
+				if(connector.get(string)[1].equals(endEvent.getName())) {
 					return string + ", " + respPergunta;	
-			}	
+				}	
+			}
 		}
 		if(connector.get(string)[0].equals(endEvent.getName())) {
 			return string;
 		}
-		}
 		return connector.get(string)[0];
+		
 	}
+	
+
+	
+	
 //------------------------------>>> FORMULARIO <<<<--------------------------------
 	
 	public void campoFormulario(String tipo, String key, String[] opcoes) {
@@ -111,4 +120,34 @@ public class BPMNElemento {
 		this.nomeFluxo = nomeFluxo;
 		return nomeFluxo;	
 	}
+//----------------------------->>> PERSISTENCIA <<<---------------------------------	
+	
+	public void save(Fluxo fluxo) {
+		Persistencia p = new Persistencia();
+		p.save(fluxo);
+	}
+
+	public ArrayList<String> retornaEE() {
+		
+		return elementosEE;
+	}
+
+	public ArrayList<String> retornaSE() {
+		return elementosSE;
+	}
+
+	public ArrayList<String> retornaHT() {
+		return elementosHT;
+	}
+
+	public ArrayList<String> retornaEG() {
+		return elementosEG;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
