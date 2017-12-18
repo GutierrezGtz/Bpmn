@@ -143,6 +143,21 @@ public class BPMNElemento {
 	public ArrayList<String> retornaEG() {
 		return elementosEG;
 	}
+
+	public ArrayList<Object> retornaLista() {
+		return lista;
+	}
+
+	public HashMap<String, String[]> retornaConnector() {
+		return connector;
+	}
+
+	public HashMap<String, String[]> retornaValores() {
+		return valores;
+	}
+	
+	
+	
 	
 	
 	

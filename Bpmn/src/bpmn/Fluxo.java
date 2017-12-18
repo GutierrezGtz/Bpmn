@@ -14,19 +14,19 @@ public class Fluxo {
 	private ArrayList<String> elementos_EG;
 	private ArrayList<String> elementos_EE;
 	
-	private ArrayList<Object> lista = new ArrayList<>();
-	private HashMap<String, String[]> connector = new HashMap<>();
-	private HashMap<String, String[]> valores = new HashMap<>();
+	private ArrayList<Object> lista_ = new ArrayList<>();
+	private HashMap<String, String[]> connector_ = new HashMap<>();
+	private HashMap<String, String[]> valores_ = new HashMap<>();
 	
-    public Fluxo(String nome, ArrayList<String> elementos_SE, ArrayList<String> elementos_HT, ArrayList<String> elementos_EG, ArrayList<String> elementos_EE ) {
+    public Fluxo(String nome, ArrayList<String> elementos_SE, ArrayList<String> elementos_HT, ArrayList<String> elementos_EG, ArrayList<String> elementos_EE, ArrayList<Object> lista_, HashMap<String, String[]> connector_, HashMap<String, String[]> valores_ ) {
         this.nome = nome; 
         this.setElementos_SE(elementos_SE);
         this.setElementos_HT(elementos_HT);
         this.setElementos_EG(elementos_EG);
         this.setElementos_EE(elementos_EE);
-        this.setLista(elemento.lista);
-        this.setConnector(elemento.connector);
-        this.setValores(elemento.valores);
+        this.setLista_(lista_);
+        this.setConnector_(connector_);
+        this.setValores_(valores_);
     }
 
 
@@ -65,30 +65,6 @@ public class Fluxo {
 		this.elementos_EE = elementos_EE;
 	}
 
-	public ArrayList<Object> getLista() {
-		return lista;
-	}
-
-	public void setLista(ArrayList<Object> lista) {
-		this.lista = lista;
-	}
-
-	public HashMap<String, String[]> getConnector() {
-		return connector;
-	}
-
-	public void setConnector(HashMap<String, String[]> connector) {
-		this.connector = connector;
-	}
-
-	public HashMap<String, String[]> getValores() {
-		return valores;
-	}
-
-	public void setValores(HashMap<String, String[]> valores) {
-		this.valores = valores;
-	}
-
 
 	public ArrayList<String> getElementos_SE() {
 		return elementos_SE;
@@ -98,5 +74,38 @@ public class Fluxo {
 	public void setElementos_SE(ArrayList<String> elementos_SE) {
 		this.elementos_SE = elementos_SE;
 	}
+
+
+	public ArrayList<Object> getLista_() {
+		return lista_;
+	}
+
+
+	public void setLista_(ArrayList<Object> lista_) {
+		this.lista_ = lista_;
+	}
+
+
+	public HashMap<String, String[]> getConnector_() {
+		return connector_;
+	}
+
+
+	public void setConnector_(HashMap<String, String[]> connector_) {
+		this.connector_ = connector_;
+	}
+
+
+	public HashMap<String, String[]> getValores_() {
+		return valores_;
+	}
+
+
+	public void setValores_(HashMap<String, String[]> valores_) {
+		this.valores_ = valores_;
+	}
+
+
+
 
 }

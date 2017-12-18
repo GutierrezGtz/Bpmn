@@ -36,7 +36,7 @@ public class Persistir_Test {
 		elemento.connect("Responder questao3",new String[] {"fim"});
 		
 		
-		Fluxo fluxo = new Fluxo(elemento.nomeDoFluxo("Fluxo Teste"), elemento.retornaSE(), elemento.retornaHT(), elemento.retornaEG(), elemento.retornaEE()) ;
+		Fluxo fluxo = new Fluxo(elemento.nomeDoFluxo("Fluxo Teste"), elemento.retornaSE(), elemento.retornaHT(), elemento.retornaEG(), elemento.retornaEE(), elemento.retornaLista(), elemento.retornaConnector(), elemento.retornaValores());
 		elemento.save(fluxo);
 		Assert.assertEquals(Arrays.asList("fim"), elemento.retornaEE());
 		

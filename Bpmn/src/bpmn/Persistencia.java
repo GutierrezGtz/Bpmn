@@ -30,8 +30,10 @@ public class Persistencia {
             printWriter.println(fluxo.getElementos_HT());
             printWriter.println(fluxo.getElementos_EG());
             printWriter.println(fluxo.getElementos_EE());
+            printWriter.println(fluxo.getLista_());
+            printWriter.println(fluxo.getValores_());
+            printWriter.println(fluxo.getConnector_());
             
-
             printWriter.flush();
             printWriter.close();
 
