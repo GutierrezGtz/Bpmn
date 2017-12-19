@@ -82,7 +82,6 @@ public class ElementoTest {
 		elemento.connect("x",new String[] {"inicio"});
 	}
 	
-	
 	@Test
 	public void connect_happy_SE_HT_EG_2elements_true_EE() throws Exception{
 	elemento.adicionaElemento(new StartEvent("inicio"));

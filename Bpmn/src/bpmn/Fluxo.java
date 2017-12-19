@@ -15,18 +15,24 @@ public class Fluxo {
 	private ArrayList<String> elementos_EE;
 	
 	private ArrayList<Object> lista_ = new ArrayList<>();
-	private HashMap<String, String[]> connector_ = new HashMap<>();
-	private HashMap<String, String[]> valores_ = new HashMap<>();
+	private ArrayList<String> keyConnector;
+	private ArrayList<String> valueConnector;
+
+	private ArrayList<String> linhas;
 	
-    public Fluxo(String nome, ArrayList<String> elementos_SE, ArrayList<String> elementos_HT, ArrayList<String> elementos_EG, ArrayList<String> elementos_EE, ArrayList<Object> lista_, HashMap<String, String[]> connector_, HashMap<String, String[]> valores_ ) {
+	public Fluxo() {
+		
+	}
+	
+    public Fluxo(String nome, ArrayList<String> elementos_SE, ArrayList<String> elementos_HT, ArrayList<String> elementos_EG, ArrayList<String> elementos_EE, ArrayList<Object> lista_, ArrayList<String> arrayList2, ArrayList<String> arrayList) {
         this.nome = nome; 
         this.setElementos_SE(elementos_SE);
         this.setElementos_HT(elementos_HT);
         this.setElementos_EG(elementos_EG);
         this.setElementos_EE(elementos_EE);
         this.setLista_(lista_);
-        this.setConnector_(connector_);
-        this.setValores_(valores_);
+        this.setKeyConnector(arrayList2);
+        this.setValueConnector(arrayList);
     }
 
 
@@ -85,26 +91,43 @@ public class Fluxo {
 		this.lista_ = lista_;
 	}
 
-
-	public HashMap<String, String[]> getConnector_() {
-		return connector_;
+	public ArrayList<String> getKeyConnector() {
+		return keyConnector;
 	}
 
 
-	public void setConnector_(HashMap<String, String[]> connector_) {
-		this.connector_ = connector_;
+	public void setKeyConnector(ArrayList<String> arrayList2) {
+		this.keyConnector = arrayList2;
 	}
 
 
-	public HashMap<String, String[]> getValores_() {
-		return valores_;
+	public ArrayList<String> getValueConnector() {
+		return valueConnector;
 	}
 
 
-	public void setValores_(HashMap<String, String[]> valores_) {
-		this.valores_ = valores_;
+	public void setValueConnector(ArrayList<String> valueConnector) {
+		this.valueConnector = valueConnector;
 	}
 
+
+	public boolean getVerificadorDeNome(String rVer) {
+		if(elemento.listaFluxos.contains(rVer)) {
+			this.setNome(rVer);
+			return true;
+		}else {
+			return false;
+		}
+			
+		
+	}
+	
+	public void trataLeitura(String linha) {
+		linhas.add(linha);
+		this.nome = linhas.get(0);
+		//this.elementos_SE = linhas.get(1);
+		
+	}
 
 
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 
 public class BPMNElemento {
+	Persistencia p = new Persistencia();
 	
 	ArrayList<Object> lista = new ArrayList<>();
 	HashMap<String, String[]> connector = new HashMap<>();
@@ -23,6 +24,10 @@ public class BPMNElemento {
 	private String ultimoValor;
 	String nomeFluxo;
 	String nomeElemento;
+	ArrayList<String> keyConnector = new ArrayList<String>();
+	ArrayList<String> valueConnector = new ArrayList<String>();
+
+	ArrayList<String> listaFluxos = new ArrayList<String>();
 	
 //------------------------------>>>METODOS ADICIONA<<<-----------------------------	
 
@@ -63,6 +68,14 @@ public class BPMNElemento {
 			if(!lista.contains(strings[i])) {
 				throw new IllegalArgumentException("Elemento Inexistente");
 			} else {
+				keyConnector.add(string);
+				if(string != null) {
+					for(int j = 0; j < strings.length; j++) {
+						valueConnector.add(strings[j]);
+					}
+					valueConnector.add("/separa/");
+				}
+				
 				connector.put(string, strings);
 			} 
 		}
@@ -111,6 +124,8 @@ public class BPMNElemento {
 						valida = true;
 					}else if(this.respPergunta == valores.get(key)[1]) {
 						valida = false;
+					}else {
+						valida = true;
 					}
 		}
 	}
@@ -123,7 +138,6 @@ public class BPMNElemento {
 //----------------------------->>> PERSISTENCIA <<<---------------------------------	
 	
 	public void save(Fluxo fluxo) {
-		Persistencia p = new Persistencia();
 		p.save(fluxo);
 	}
 
@@ -147,22 +161,21 @@ public class BPMNElemento {
 	public ArrayList<Object> retornaLista() {
 		return lista;
 	}
-
-	public HashMap<String, String[]> retornaConnector() {
-		return connector;
+	
+	public ArrayList<String> retornaKeyConnector() {
+		return keyConnector;
 	}
 
-	public HashMap<String, String[]> retornaValores() {
-		return valores;
+	public ArrayList<String> retornaValueConnector() {
+		return valueConnector;
+	}
+
+	public void ler() {
+		p.ler();
+		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 }

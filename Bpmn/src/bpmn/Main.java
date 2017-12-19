@@ -20,7 +20,7 @@ public class Main {
 
 
 		while(true) {
-			b.lerInicial(flux);
+			//b.lerInicial(flux);
 			System.out.println("\nBPM(Matheus)\n");
 			System.out.println(flux.getNome());			
 			System.out.println("Escolha uma das seguintes opcoes:\n\n"
@@ -58,7 +58,7 @@ public class Main {
 							    	 System.out.println("Digite o nome do Elemento: ");
 							    	 b.nomeElemento  = ler.next();
 							    	 b.adicionaElemento(new StartEvent(b.nomeElemento));
-							    	 b.elementosSE.add(b.nomeElemento);
+							    	 
 							         break;
 							         
 							     case 2://----- HT ------
@@ -69,30 +69,35 @@ public class Main {
 							    	 	System.out.println("Digite o numero de campos: ");
 							    	 	int rec = ler.nextInt();
 							    	 	op = new String[rec];
+							    	 	String tipo = null;
 							    	 	for(int i = 0; i < rec; i++) {
+							    	 		System.out.println("Digite 1 para tipo: V ou F (apenas essa opcao no momento)");
+							    	 		int tip =  ler.nextInt();
+							    	 		if(tip == 1) {
+							    	 			tipo = "V ou F";
+							    	 		}
 							    	 		System.out.println("Digite o nome do campo: ");
 								    	 	String rec2 = ler.next();
 							    	 		op[i] = rec2;//aqui nome do campo + o tipo do campo(case 1 int case 2 texto case 3 lista)
 							    	 		
 							    	 		
-							    	 		
-							    	 		b.campoFormulario(b.nomeElemento, op);
+							    	 		b.campoFormulario(tipo, b.nomeElemento, op);
 							    	 	}
-							    	 b.elementosHT.add(b.nomeElemento);
+							    	 
 							         break;
 							         
 							     case 3://----- EG ------
 							    	 System.out.println("Digite o nome do Elemento: ");
 							    	 b.nomeElemento  = ler.next();
 							    	 b.adicionaElemento(new ExclusiveGateway(b.nomeElemento));
-							    	 b.elementosEG.add(b.nomeElemento);
+							    	 
 							         break;
 							         
 							     case 4://----- EE ------
 							    	 System.out.println("Digite o nome do Elemento: ");
 							    	 b.nomeElemento  = ler.next();
 							    	 b.adicionaElemento(new EndEvent(b.nomeElemento));
-							    	 b.elementosEE.add(b.nomeElemento);
+							    	 
 							         break;
 							         
 							     default:
@@ -120,11 +125,11 @@ public class Main {
 					    	boolean t = true;
 					    	while(t) {
 					    		System.out.println("Digite o Nome Do Fluxo: ");
-					    		b.nomeFluxo = ler.next();
-						    	if(!b.listaFluxos.contains(b.nomeFluxo)) {
-						    		b.listaFluxos.add(b.nomeFluxo);
-						    		flux = new Fluxo(b.nomeFluxo);
-						    		flux.setNome(b.nomeFluxo);
+					    		String name = ler.next();
+						    	if(!b.listaFluxos.contains(name)) {
+						    		b.listaFluxos.add(name);
+						    		flux = new Fluxo(b.nomeDoFluxo(name), b.retornaSE(), b.retornaHT(), b.retornaEG(), b.retornaEE(), b.retornaLista(), b.retornaKeyConnector(), b.retornaValueConnector());
+						    		//flux.setNome(b.nomeFluxo);
 						    		b.save(flux);
 						    		t = false;
 						    		
@@ -154,28 +159,23 @@ public class Main {
 				
 		    case 2://--------------------->>>START FLUXO<<<--------------------------
 		    	 	System.out.println("-------------Inicio Do Fluxo!-----------------");	
-//		    	 	if(b.elementosSE.get(1) != null ) {
 			    	 	System.out.println("Defina Elemento de Inicio: ");
 			    	 	inicioElement = ler.next();
 			    	 	elementoPos = b.getNextElement(inicioElement);
-//		    	 	}else if(b.elementosSE.get(1) == null ) {
-//		    	 		inicioElement = b.elementosSE.get(0);
-//		    	 		elementoPos = b.getNextElement(inicioElement);
-//		    	 	}
-	    	 		for(int i = 0; i < b.elementosHT.size(); i++) {//verificar##
+	    	 	
 		    	 		if(b.elementosHT.contains(elementoPos)) {
-		    	 			System.out.println("Escreva o Campo de sua Escolha:");
-		    	 			for(int j = 0; j < op.length; j++ ) {
-		    	 				System.out.println(op[j]);
-		    	 				
-		    	 			}
+		    	 			System.out.println();
+		    	 			System.out.println("Escolha o Campo Verdadeiro ou Falso");
 		    	 			String respFormulario = ler.next();
-	    	 				b.preencheFormulario(elementoPos , respFormulario);
-		    	 		} 
-		    	 		
-	    	 		}
+			 				b.preencheFormulario(elementoPos , respFormulario);
+		    	 		}
+		    	 		 
+	    	 		while(!b.elementosEE.contains(b.getNextElement(elementoPos))) {
 	    	 		elementoPos = b.getNextElement(elementoPos);
-	    	 		System.out.println(elementoPos);
+	    	 		}
+	    	 		
+	    	 		b.getNextElement(elementoPos);
+	    	 		
 		         break;
 		         
 		    case 3://-----------------------LISTAR FLUXOS-----------------------------------
@@ -198,9 +198,8 @@ public class Main {
 		    case 4://------->>>CARREGAR FLUXO<<<--------
 		    	System.out.println("Digite o Nome Do Fluxo: ");
 		    	String rVer = ler.next();
-		    		if(b.listaFluxos.contains(rVer)) {
-		    			flux.setVerificadorDeNome(rVer);
-		    			b.ler(flux);
+		    		if(flux.getVerificadorDeNome(rVer)== true) {
+		    			b.ler();
 		    		}else {
 		    			System.out.println("Não existe um fluxo com este Nome!");
 		    		} 	
