@@ -125,7 +125,7 @@ public class BPMNElemento {
 					}else if(this.respPergunta == valores.get(key)[1]) {
 						valida = false;
 					}else {
-						valida = true;
+						valida = true;//engana bobo
 					}
 		}
 	}
